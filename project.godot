@@ -14,7 +14,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="AsepriteWizard"
+config/name="ColorShooter"
+config/description="A STG Game with Color Shooter"
 config/icon="res://icon.png"
 
 [editor_plugins]
