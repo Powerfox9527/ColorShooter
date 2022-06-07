@@ -21,6 +21,9 @@ func _process(delta):
 		move_local_y(-Input.get_action_strength("up") * vertical_speed)
 	elif Input.get_action_strength("down"):
 		move_local_y(Input.get_action_strength("down") * vertical_speed)
+	
+	if Input.is_action_just_pressed("shoot"):
+		createBullet()
 	# setColour(colour + Color(delta * 3, delta * 4, delta * 5, 0))
 	
 func setColour(new_colour):
@@ -29,3 +32,8 @@ func setColour(new_colour):
 	new_colour.b = min(1.0, new_colour.b)
 	colour = new_colour
 	material.set_shader_param("colour", new_colour)
+	
+func createBullet():
+	var bullet = preload("res://Scenes/Bullet.tscn").instance()
+	bullet.setColour(colour)
+	bullet.set_position(get_position() + Vector2(0, 0.2))
