@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
-shader_param/modulate = Color( 0.866667, 0.184314, 0.184314, 1 )
+shader_param/colour = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/Layer 1.png-6da211b0ce292d84a8f961ac69e2d1fe.stex"
