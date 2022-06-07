@@ -7,11 +7,9 @@ shader = ExtResource( 2 )
 shader_param/modulate = Color( 0.87451, 0.364706, 0.87451, 1 )
 
 [sub_resource type="StreamTexture" id=6]
-flags = 4
 load_path = "res://.import/Layer 1.png-6da211b0ce292d84a8f961ac69e2d1fe.stex"
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = SubResource( 6 )
 region = Rect2( 0, 0, 20, 10 )
 
@@ -28,5 +26,5 @@ material = SubResource( 5 )
 position = Vector2( 2, 0 )
 frames = SubResource( 8 )
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL1Nwcml0ZXMvQnVsbGV0LmFzZXByaXRlCmxheWVyfD1MYXllciAxCm9wX2V4cHw9VHJ1ZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL1Nwcml0ZXMvQnVsbGV0LmFzZXByaXRlCmxheWVyfD1MYXllciAxCm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
 }

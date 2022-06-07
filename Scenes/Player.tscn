@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[sub_resource type="StreamTexture" id=3]
+[ext_resource path="res://Scripts/Shaders/SetColour.gdshader" type="Shader" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/modulate = Color( 0.866667, 0.184314, 0.184314, 1 )
+
+[sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/Layer 1.png-6da211b0ce292d84a8f961ac69e2d1fe.stex"
 
 [sub_resource type="Animation" id=2]
@@ -20,10 +27,12 @@ tracks/0/keys = {
 }
 
 [node name="Sprite" type="Sprite"]
-texture = SubResource( 3 )
+material = SubResource( 3 )
+texture = SubResource( 4 )
 hframes = 2
 vframes = 2
-frame = 3
+frame = 1
+script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvU3BhY2VzaGlwLmFzZXByaXRlCmxheWVyfD1MYXllciAxCm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
 }
