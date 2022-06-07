@@ -22,6 +22,16 @@ config/icon="res://icon.png"
 
 enabled=PoolStringArray( "res://addons/AsepriteWizard/plugin.cfg" )
 
+[importer_defaults]
+
+texture_array={
+"flags/filter": false
+}
+texture={
+"compress/mode": 3,
+"flags/filter": false
+}
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
