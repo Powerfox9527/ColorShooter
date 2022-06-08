@@ -1,32 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColour.gdshader" type="Shader" id=2]
+[ext_resource path="res://Sprites/Bullet.png" type="Texture" id=3]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/colour = null
+shader_param/color = null
 
-[sub_resource type="StreamTexture" id=6]
-load_path = "res://.import/Layer 1.png-6da211b0ce292d84a8f961ac69e2d1fe.stex"
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = SubResource( 6 )
-region = Rect2( 0, 0, 20, 10 )
-
-[sub_resource type="SpriteFrames" id=8]
-animations = [ {
-"frames": [ SubResource( 7 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
-
-[node name="Bullet" type="AnimatedSprite"]
-material = SubResource( 5 )
-position = Vector2( 2, 0 )
-frames = SubResource( 8 )
+[node name="Sprite" type="Sprite"]
+material = SubResource( 1 )
+position = Vector2( 5, 0 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
 script = ExtResource( 1 )
-__meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL1Nwcml0ZXMvQnVsbGV0LmFzZXByaXRlCmxheWVyfD1MYXllciAxCm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
-}
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+energy = 5.0

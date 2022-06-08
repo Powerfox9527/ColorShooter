@@ -1,9 +1,8 @@
-extends AnimatedSprite
-var colour = Color(0.0, 0.0, 0.0, 1.0)
-var speed = 1.0
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+extends Sprite
+var color = Color(0.0, 0.0, 0.0, 1.0)
+var speed = 40
+var velocity = Vector2(0.0, 0.0)
+var life_span = 5.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,14 +10,12 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	move_local_y(speed)
+	life_span -= delta
+	if life_span <= 0:
+		queue_free()
+	set_global_position(get_global_position() + velocity * speed)
+	get_node("Light2D").color = material.get_shader_param("color")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func setColour(new_colour):
-	new_colour.r = min(1.0, new_colour.r)
-	new_colour.g = min(1.0, new_colour.g)
-	new_colour.b = min(1.0, new_colour.b)
-	colour = new_colour
-	material.set_shader_param("colour", new_colour)
