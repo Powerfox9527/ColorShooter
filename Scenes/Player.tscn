@@ -35,7 +35,7 @@ scale = Vector2( 3, 3 )
 texture = SubResource( 6 )
 hframes = 2
 vframes = 2
-frame = 2
+frame = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvU3BhY2VzaGlwLmFzZXByaXRlCmxheWVyfD1MYXllciAxCm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="

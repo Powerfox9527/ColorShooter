@@ -16,5 +16,6 @@ texture = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 3 )
 energy = 5.0

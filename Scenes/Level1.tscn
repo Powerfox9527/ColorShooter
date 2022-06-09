@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Mouse.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Background.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/UI/RedBar.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/RedFrame.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/GreenBar.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/BlueBar.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/UI/GreenFrame.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/UI/BlurFrame.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/RGBBars.gd" type="Script" id=10]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 960, 540 )
@@ -17,10 +22,31 @@ texture = ExtResource( 3 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 464, 334 )
 
-[node name="RedBar" type="TextureProgress" parent="."]
+[node name="Node" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="RedBar" type="TextureProgress" parent="Node"]
 margin_right = 36.0
 margin_bottom = 12.0
-rect_scale = Vector2( 10, 10 )
+rect_scale = Vector2( 4, 4 )
 value = 90.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 4 )
+
+[node name="BlueBar" type="TextureProgress" parent="Node"]
+margin_left = 284.0
+margin_right = 320.0
+margin_bottom = 12.0
+rect_scale = Vector2( 4, 4 )
+value = 90.0
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 7 )
+
+[node name="GreenBar" type="TextureProgress" parent="Node"]
+margin_left = 142.0
+margin_right = 178.0
+margin_bottom = 12.0
+rect_scale = Vector2( 4, 4 )
+value = 90.0
+texture_under = ExtResource( 8 )
+texture_progress = ExtResource( 6 )
