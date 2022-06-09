@@ -15,7 +15,6 @@ func _process(delta):
 		queue_free()
 	set_global_position(get_global_position() + velocity * speed)
 	get_node("Light2D").color = material.get_shader_param("color")
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

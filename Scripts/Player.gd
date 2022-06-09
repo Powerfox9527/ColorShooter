@@ -6,11 +6,11 @@ extends Sprite
 # var b = "text"
 var horizontal_speed = 7.0
 var vertical_speed = 7.0
-var color = Color(1.0, 1.0, 1.0, 1.0)
+var color = Color(1.0, 0.0, 1.0, 1.0)
 var velocity = Vector2.ZERO
 var self_to_mouse = Vector2.ZERO
 
-export var last_shoot_time = 0
+var last_shoot_time = 0
 export var shoot_interval = 0.3
 # Called when the node enters the scene tree for the first time.
 func _ready():
