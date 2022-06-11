@@ -1,8 +1,10 @@
 extends Sprite
+
 var color = Color(0.0, 0.0, 0.0, 1.0)
-var speed = 40
+export var speed = 30
 var velocity = Vector2(0.0, 0.0)
 var life_span = 5.0
+var player
 
 
 # Called when the node enters the scene tree for the first time.
