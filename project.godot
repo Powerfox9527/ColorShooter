@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Coke.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+}, {
 "base": "Node",
 "class": "Util",
 "language": "GDScript",
 "path": "res://Scripts/Util.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
+"Player": "",
 "Util": ""
 }
 

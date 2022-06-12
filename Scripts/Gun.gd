@@ -2,6 +2,7 @@ extends Sprite
 
 var last_shoot_time = 0
 export var shoot_interval = 0.3
+export var bullet_speed = 300
 onready var player = get_node("..")
 onready var animator = get_node("AnimationPlayer")
 # Declare member variables here. Examples:
@@ -15,7 +16,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var angle = Vector2.UP.angle_to(get_node("..").self_to_mouse)
 	var anim = ""
 	if abs(angle) < PI / 2:
@@ -27,17 +28,18 @@ func _process(delta):
 		anim += "Shoot"
 	else:
 		anim += "Idle"
-	animator.set_current_animation(anim)
+	if animator.get_current_animation() != anim:
+		animator.set_current_animation(anim)
 
 func createBullet():
 	if last_shoot_time > 0:
 		return
 	last_shoot_time = shoot_interval
-	var bullet = preload("res://Scenes/Bullet.tscn").instance()
+	var bullet = preload("res://Scenes/Guns/Bullet.tscn").instance()
 	get_node("/root/World").add_child(bullet)
 	var color = get_node("..").color
 	var self_to_mouse = get_node("..").self_to_mouse
-	Util.setColor(bullet.material, color)
+	bullet.setColor(color)
 	bullet.set_global_position(get_global_position())
-	bullet.velocity = self_to_mouse / self_to_mouse.length()
+	bullet.linear_velocity = self_to_mouse / self_to_mouse.length() * bullet_speed
 	bullet.player = self

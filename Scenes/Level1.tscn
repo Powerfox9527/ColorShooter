@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/PhysicsPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Mouse.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/Background.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/Background.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/UI/RedBar.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/RedFrame.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/UI/GreenBar.png" type="Texture" id=6]
@@ -10,43 +10,65 @@
 [ext_resource path="res://Sprites/UI/GreenFrame.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/UI/BlurFrame.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/RGBBars.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/UI/Mouse.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/Enemies/Coke.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sprites/UI/Bar.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/UI/Frame.png" type="Texture" id=14]
 
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
+visible = false
 position = Vector2( 960, 540 )
 texture = ExtResource( 3 )
 
-[node name="Mouse" parent="." instance=ExtResource( 2 )]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 337 )
-
-[node name="Node" type="Node" parent="."]
+[node name="RGBBars" type="Node" parent="."]
 script = ExtResource( 10 )
 
-[node name="RedBar" type="TextureProgress" parent="Node"]
-margin_right = 36.0
-margin_bottom = 12.0
-rect_scale = Vector2( 4, 4 )
+[node name="RedBar" type="TextureProgress" parent="RGBBars"]
+margin_left = 148.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 value = 90.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 4 )
 
-[node name="BlueBar" type="TextureProgress" parent="Node"]
-margin_left = 284.0
-margin_right = 320.0
-margin_bottom = 12.0
-rect_scale = Vector2( 4, 4 )
+[node name="BlueBar" type="TextureProgress" parent="RGBBars"]
+margin_left = 292.0
+margin_top = 2.0
+margin_right = 328.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 value = 90.0
 texture_under = ExtResource( 9 )
 texture_progress = ExtResource( 7 )
 
-[node name="GreenBar" type="TextureProgress" parent="Node"]
-margin_left = 142.0
-margin_right = 178.0
-margin_bottom = 12.0
-rect_scale = Vector2( 4, 4 )
+[node name="GreenBar" type="TextureProgress" parent="RGBBars"]
+margin_left = 220.0
+margin_top = 2.0
+margin_right = 256.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 value = 90.0
 texture_under = ExtResource( 8 )
 texture_progress = ExtResource( 6 )
+
+[node name="OpacityBar" type="TextureProgress" parent="RGBBars"]
+margin_right = 36.0
+margin_bottom = 12.0
+rect_scale = Vector2( 4, 4 )
+value = 90.0
+texture_under = ExtResource( 14 )
+texture_progress = ExtResource( 13 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 306, 299 )
+scale = Vector2( 3, 3 )
+
+[node name="Coke" parent="." instance=ExtResource( 12 )]
+position = Vector2( 608, 292 )
+
+[node name="Mouse" parent="." instance=ExtResource( 2 )]
+texture = ExtResource( 11 )
