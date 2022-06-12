@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
+"base": "Reference",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Scripts/Coke.gd"
+"path": "res://Scripts/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",

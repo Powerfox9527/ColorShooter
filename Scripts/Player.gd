@@ -55,23 +55,22 @@ func _physics_process(delta):
 	
 func set_anim(anim = ""):
 	var animator = get_node("AnimationPlayer")
-	if animator:
-		if anim.length() > 0:
-			animator.set_current_animation(anim)
-			return
-		var angle = Vector2.UP.angle_to(self_to_mouse)
-		if angle < 0:
-			get_node("PlayerSprite").set_flip_h(true)
-		else:
-			get_node("PlayerSprite").set_flip_h(false)
-		
-		if angle < PI / 2 and angle > -1 * PI/2:
-			anim += "Back" 
-		if velocity.length() > 0:
-			anim += "Walk"
-		else:
-			anim += "Idle"
-		if animator.get_current_animation() != anim:
-			animator.set_current_animation(anim)
+	if anim.length() > 0:
+		animator.set_current_animation(anim)
+		return
+	var angle = Vector2.UP.angle_to(self_to_mouse)
+	if angle < 0:
+		get_node("PlayerSprite").set_flip_h(true)
+	else:
+		get_node("PlayerSprite").set_flip_h(false)
+	
+	if angle < PI / 2 and angle > -1 * PI/2:
+		anim += "Back" 
+	if velocity.length() > 0:
+		anim += "Walk"
+	else:
+		anim += "Idle"
+	if animator.get_current_animation() != anim:
+		animator.set_current_animation(anim)
 		
 		

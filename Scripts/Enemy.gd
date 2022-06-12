@@ -44,4 +44,3 @@ func get_hurt(amount):
 		Util.setColor(get_node("Sprite").material, color)
 	else:
 		queue_free()
-
