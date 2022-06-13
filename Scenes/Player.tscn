@@ -99,6 +99,7 @@ load_path = "res://.import/Gun.png-d9b4db70ebf1c2393c01c3232e4e7492.stex"
 extents = Vector2( 6.5, 11 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -129,3 +130,6 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
 shape = SubResource( 18 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

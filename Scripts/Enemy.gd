@@ -39,7 +39,7 @@ func get_hurt(amount):
 	if amount < 0:
 		print("No Hurt Amount")
 	var color = get_node("Sprite").material.get_shader_param("color")
-	color.a -= amount / 100
+	color.a -= float(amount) / 100.0
 	if color.a > 0:
 		Util.setColor(get_node("Sprite").material, color)
 	else:

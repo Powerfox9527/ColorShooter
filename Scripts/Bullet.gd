@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 export var life_span = 3.0
-export var power = 2
+export var power = 5
 var player
 
 	# set_global_position(get_global_position() + velocity * speed)
