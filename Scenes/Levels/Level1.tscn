@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Mouse.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Players/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Players/Mouse.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/UI/Background.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/UI/RedBar.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/RedFrame.png" type="Texture" id=5]
@@ -9,17 +9,12 @@
 [ext_resource path="res://Sprites/UI/BlueBar.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/UI/GreenFrame.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/UI/BlurFrame.png" type="Texture" id=9]
-[ext_resource path="res://Scripts/RGBBars.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/UI/Mouse.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/Utils/RGBBars.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Enemies/Coke.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sprites/UI/Bar.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/UI/Frame.png" type="Texture" id=14]
 
 [node name="World" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 260, 218 )
-scale = Vector2( 3, 3 )
 
 [node name="Background" type="Sprite" parent="."]
 visible = false
@@ -28,9 +23,6 @@ texture = ExtResource( 3 )
 
 [node name="Coke" parent="." instance=ExtResource( 12 )]
 position = Vector2( 608, 292 )
-
-[node name="Mouse" parent="." instance=ExtResource( 2 )]
-texture = ExtResource( 11 )
 
 [node name="RGBBars" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
@@ -72,3 +64,9 @@ rect_scale = Vector2( 4, 4 )
 value = 90.0
 texture_under = ExtResource( 14 )
 texture_progress = ExtResource( 13 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 295, 284 )
+scale = Vector2( 3, 3 )
+
+[node name="Mouse" parent="." instance=ExtResource( 2 )]

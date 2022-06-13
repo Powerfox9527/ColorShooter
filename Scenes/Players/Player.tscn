@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Shaders/SetColour.gdshader" type="Shader" id=1]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Players/Player.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Players/PlayerHand.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Guns/Gun.tscn" type="PackedScene" id=4]
 

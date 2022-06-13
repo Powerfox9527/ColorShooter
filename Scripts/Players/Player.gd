@@ -5,8 +5,8 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var horizontal_speed = 250.0
-var vertical_speed = 250.0
+export var horizontal_speed = 250.0
+export var vertical_speed = 250.0
 export var color = Color(1.0, 1.0, 1.0, 1.0)
 var velocity = Vector2.ZERO
 var self_to_mouse = Vector2.ZERO
