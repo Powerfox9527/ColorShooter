@@ -12,6 +12,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if player == null or player.is_queued_for_deletion():
+		return
 	var color = player.material.get_shader_param("color")
 	get_node("RedBar:Range").set_value(color.r * 100)
 	get_node("GreenBar:Range").set_value(color.g * 100)

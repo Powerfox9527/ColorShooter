@@ -76,7 +76,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14, 25.6 )
+extents = Vector2( 14.5, 25.8 )
 
 [node name="Coke" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
@@ -102,10 +102,13 @@ anims/Idle = SubResource( 4 )
 anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.200002, 6.19999 )
+position = Vector2( -0.0999998, 6 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="."]
 visible = false
 texture = ExtResource( 3 )
 energy = 16.0
+
+[connection signal="input_event" from="." to="." method="_on_Coke_input_event"]
