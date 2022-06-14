@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Utils/Mouse.gd" type="Script" id=1]
 
 [sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/Mouse.png-6fce340785a3be5c2b86fa2e4f082199.stex"
+load_path = "res://.import/Mouse.png-ea3c02ff93855a3f4d7641817542b46d.stex"
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -27,7 +27,7 @@ scale = Vector2( 5, 5 )
 texture = SubResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvTW91c2UuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvVUkvTW91c2UuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Sprites/Enemies/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorExceptGray.gdshader" type="Shader" id=2]
+[ext_resource path="res://Sprites/Enemies/CokeLight.png" type="Texture" id=3]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
@@ -103,3 +104,8 @@ anims/Walk = SubResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.200002, 6.19999 )
 shape = SubResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+energy = 16.0

@@ -65,8 +65,7 @@ value = 90.0
 texture_under = ExtResource( 14 )
 texture_progress = ExtResource( 13 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 295, 284 )
-scale = Vector2( 3, 3 )
-
 [node name="Mouse" parent="." instance=ExtResource( 2 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 246 )

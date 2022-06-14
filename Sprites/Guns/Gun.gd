@@ -17,10 +17,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	var angle = Vector2.UP.angle_to(get_node("..").self_to_mouse)
+#	var angle = Vector2.UP.angle_to(get_node("..").self_to_mouse)
 	var anim = ""
-	if abs(angle) < PI / 2:
-		anim += "Back"
+#	if abs(angle) < PI / 2:
+#		anim += "Back"
 	if last_shoot_time > 0:
 		last_shoot_time -= delta
 

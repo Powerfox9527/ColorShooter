@@ -1,42 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/Guns/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Players/PlayerHand.png" type="Texture" id=2]
 
-[sub_resource type="StreamTexture" id=20]
-load_path = "res://.import/Layer 1.png-17403b0731d140ee10d6ed05a9207e8c.stex"
-
-[sub_resource type="Animation" id=19]
-length = 0.1
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3.0 ]
-}
-
-[sub_resource type="Animation" id=16]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 4.0, 5.0 ]
-}
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/Gun.png-e577dccd87d109f000bc9d1536e55aef.stex"
 
 [sub_resource type="Animation" id=13]
 length = 0.1
@@ -71,20 +38,16 @@ tracks/0/keys = {
 }
 
 [node name="Gun" type="Sprite"]
-texture = SubResource( 20 )
-hframes = 3
+texture = SubResource( 18 )
+hframes = 2
 vframes = 2
 script = ExtResource( 1 )
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvR3Vucy9HdW4uYXNlcHJpdGUKbGF5ZXJ8PUxheWVyIDEKb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvR3Vucy9HdW4uYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
+bullet_speed = 500
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BackIdle = SubResource( 19 )
-anims/BackShoot = SubResource( 16 )
+reset_on_save = false
 anims/Idle = SubResource( 13 )
 anims/Shoot = SubResource( 17 )
-
-[node name="Hand" type="Sprite" parent="."]
-position = Vector2( -3, 1 )
-texture = ExtResource( 2 )

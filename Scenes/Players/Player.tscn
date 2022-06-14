@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Shaders/SetColour.gdshader" type="Shader" id=1]
 [ext_resource path="res://Scripts/Players/Player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Players/PlayerHand.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Guns/Gun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=19]
-length = 0.1
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
@@ -20,22 +19,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 16.0, 17.0, 18.0, 19.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Gun:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3.0 ]
-}
 
 [sub_resource type="Animation" id=24]
-length = 0.8
-loop = true
+length = 0.56
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -43,7 +29,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 16.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0 ]
@@ -52,18 +38,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=26]
 length = 0.2
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Gun:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 4.0, 5.0 ]
-}
 
 [sub_resource type="Animation" id=20]
 length = 0.6
@@ -82,7 +56,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-length = 0.1
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
@@ -96,22 +70,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0.0, 1.0, 2.0, 3.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Gun:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0.0 ]
-}
 
 [sub_resource type="Animation" id=22]
-length = 0.8
-loop = true
+length = 0.56
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -119,7 +80,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0 ]
@@ -128,18 +89,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=27]
 length = 0.2
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Gun:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 1.0, 2.0 ]
-}
 
 [sub_resource type="Animation" id=23]
 length = 0.6
@@ -161,16 +110,14 @@ tracks/0/keys = {
 shader = ExtResource( 1 )
 shader_param/color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StreamTexture" id=25]
-load_path = "res://.import/FrontBody.png-1f83cdead457d61d93d791ad95089542.stex"
-
 [sub_resource type="StreamTexture" id=28]
-load_path = "res://.import/Layer 1.png-9d11d9b170cb9c807a7744692b5cdaca.stex"
+load_path = "res://.import/FrontBody.png-1f83cdead457d61d93d791ad95089542.stex"
 
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 6.5, 11 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -187,7 +134,7 @@ anims/Walk = SubResource( 23 )
 [node name="PlayerSprite" type="Sprite" parent="."]
 material = SubResource( 16 )
 position = Vector2( 1, 1 )
-texture = SubResource( 25 )
+texture = SubResource( 28 )
 hframes = 6
 vframes = 6
 __meta__ = {
@@ -195,12 +142,6 @@ __meta__ = {
 }
 
 [node name="Gun" parent="." instance=ExtResource( 4 )]
-texture = SubResource( 28 )
-frame = 1
-
-[node name="Hand" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
