@@ -1,8 +1,5 @@
-class_name Bullet
-extends RigidBody2D
+extends Bullet
 
-export var power = 5
-var sender
 
 func set_color(color):
 	get_node("Light2D").color = color

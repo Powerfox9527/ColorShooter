@@ -1,7 +1,7 @@
 extends Sprite
 
 var last_shoot_time = 0
-export var shoot_interval = 0.3
+export var shoot_interval = 0.1
 export var bullet_speed = 300
 onready var player = get_node("..")
 onready var animator = get_node("AnimationPlayer")
@@ -35,11 +35,11 @@ func createBullet():
 	if last_shoot_time > 0:
 		return
 	last_shoot_time = shoot_interval
-	var bullet = preload("res://Scenes/Guns/Bullet.tscn").instance()
+	var bullet = load("res://Scenes/Guns/Bullet.tscn").instance()
 	get_node("/root/World").add_child(bullet)
 	var color = get_node("..").color
 	var self_to_mouse = get_node("..").self_to_mouse
-	bullet.setColor(color)
+	bullet.set_color(color)
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = self_to_mouse / self_to_mouse.length() * bullet_speed
-	bullet.player = self
+	bullet.sender = get_node("..")

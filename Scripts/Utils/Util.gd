@@ -9,11 +9,14 @@ class_name Util
 func _ready():
 	pass # Replace with function body.
 
-static func setColor(material, new_color):
+static func set_color(material, new_color):
 	new_color.r = min(1.0, new_color.r)
 	new_color.g = min(1.0, new_color.g)
 	new_color.b = min(1.0, new_color.b)
 	material.set_shader_param("color", new_color)
+	
+static func minus_color(color, offset):
+	return color.rgb - offset.rgb
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

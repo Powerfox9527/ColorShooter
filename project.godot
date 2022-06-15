@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Scripts/Guns/Bullet.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Utils/Util.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "Enemy": "",
 "Player": "",
 "Util": ""

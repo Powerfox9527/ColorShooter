@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
-shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/Body.png-b14e6744cb00b4b1638a4a85f100f2b4.stex"
@@ -103,7 +103,6 @@ anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0999998, 6 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -111,4 +110,5 @@ visible = false
 texture = ExtResource( 3 )
 energy = 16.0
 
-[connection signal="input_event" from="." to="." method="_on_Coke_input_event"]
+[node name="StateTimer" type="Timer" parent="."]
+autostart = true
