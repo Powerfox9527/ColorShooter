@@ -19,6 +19,7 @@ export var bullet_speed = 200
 func _ready():
 	connect("input_event", self, "_on_Enemy_input_event")
 	$StateTimer.connect("timeout", self, "generate_state")
+	$AnimationPlayer.connect("animation_finished", self, "_on_anim_finished")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -75,7 +76,7 @@ func get_hurt(amount):
 		get_node("Light2D").visible = false
 		Util.set_color(get_node("Sprite").material, color)
 	else:
-		circle_shoot()
+		dead()
 		queue_free()
 
 
@@ -121,11 +122,15 @@ func shoot(bullet_velocitys):
 		createBullet(velocity)
 		
 func circle_shoot():
+	if wait_anim == "Jump":
+		return
 	var bullet_velocities = []
 	var velocity = Vector2.UP
 	for i in range(12):
 		velocity = velocity.rotated(2 * PI / 12)
 		bullet_velocities.append(velocity)
+	set_anim("Jump", true)
+	yield(get_tree().create_timer(0.45), "timeout")
 	shoot(bullet_velocities)
 	generate_state()
 	
@@ -137,3 +142,17 @@ func createBullet(velocity):
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = velocity * bullet_speed
 	bullet.sender = self
+
+func dead():
+	var bullet_velocities = []
+	var velocity = Vector2.UP
+	for i in range(12):
+		velocity = velocity.rotated(2 * PI / 12)
+		bullet_velocities.append(velocity)
+	set_anim("Jump", true)
+	shoot(bullet_velocities)
+	generate_state()
+
+func _on_anim_finished(anim_name):
+	if anim_name == wait_anim:
+		wait_anim = "" # Replace with function body.
