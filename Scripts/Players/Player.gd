@@ -18,20 +18,29 @@ onready var gun = get_node("Gun")
 export var gun_radius = 20
 export var gun_offset = Vector2(5, 15)
 export var roll_distance = 400
-export var hurt_time = 0.2
+export var hurt_time = 1
+export var visible_internal = 0.2
+var visible_recorder = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Util.set_color(get_node("PlayerSprite").material, color)
 	$AnimationPlayer.connect("animation_finished", self, "_on_anim_finished")
-	
+	$HurtTimer.wait_time = hurt_time
+	$HurtTimer.connect("timeout", self, "stop_hurt_timer")
 
 func _physics_process(delta):
 	move(delta)
-	if hurt_time > 0:
-		hurt_time -= delta
-		set_visible(not is_visible())
 	update_gun(delta)
+	if not $HurtTimer.is_stopped():
+		if visible_recorder > visible_internal + delta:
+			set_visible(false)
+			visible_recorder = 0
+		else:
+			set_visible(true)
+			visible_recorder += delta
+	elif not is_visible():
+		set_visible(true)
 	
 
 func move(delta):
@@ -113,12 +122,15 @@ func get_hurt(amount):
 	if amount < 0:
 		print("No Hurt Amount")
 		return
-	if hurt_time > 0:
+	if not $HurtTimer.is_stopped():
 		return
 	var color = get_node("PlayerSprite").material.get_shader_param("color")
 	color.a -= float(amount) / 100.0
-	hurt_time = 0.2
+	$HurtTimer.start()
 	if color.a > 0:
 		Util.set_color(get_node("PlayerSprite").material, color)
 	else:
 		queue_free()
+
+func stop_hurt_timer():
+	$HurtTimer.stop()

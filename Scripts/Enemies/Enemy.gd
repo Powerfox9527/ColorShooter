@@ -75,6 +75,7 @@ func get_hurt(amount):
 		get_node("Light2D").visible = false
 		Util.set_color(get_node("Sprite").material, color)
 	else:
+		circle_shoot()
 		queue_free()
 
 

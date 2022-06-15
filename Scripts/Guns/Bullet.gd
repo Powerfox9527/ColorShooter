@@ -4,10 +4,13 @@ extends RigidBody2D
 export var power = 5
 var sender
 
+func _ready():
+	connect("body_entered", self, "_on_RigidBody2D_body_entered")
+
 func set_color(color):
 	get_node("Light2D").color = color
 	get_node("Sprite").material.set_shader_param("color", color)
-	connect("body_entered", self, "_on_RigidBody2D_body_entered")
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
