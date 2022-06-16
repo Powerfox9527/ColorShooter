@@ -5,6 +5,12 @@ var self_to_player = Vector2.ZERO
 var angle = 0
 var wait_anim = ""
 var state = "chase"
+var is_simple_shooting = false
+var is_color_changing = false
+var color = Color(0, 0, 0, 0)
+onready var gun = get_node("Gun")
+export var gun_radius = 0
+export var gun_offset = Vector2(75, 95)
 onready var animator = get_node("AnimationPlayer")
 export var hurt_time = 0.1 
 export var speed = 3
@@ -38,12 +44,25 @@ func _process(delta):
 	elif state == "color_change":
 		color_change()
 	elif state == "simple_shoot":
-		shoot([self_to_player])
-		generate_state()
+		simple_shoot()
 	elif state == "circle_shoot":
 		circle_shoot()
+	color = get_node("Sprite").material.get_shader_param("color")
+	update_gun(delta)
 	
-
+	
+func update_gun(delta):
+	# gun position and rotation and layer
+	var angle = Vector2.UP.angle_to(self_to_player)
+	var offset = gun_offset
+	if angle < 0:
+		offset.x = -offset.x
+	gun.set_global_position(get_global_position() + self_to_player * gun_radius + offset)
+	if angle < 0:
+		gun.set_scale(Vector2(1, -1))
+	else:
+		gun.set_scale(Vector2(1, 1))
+	gun.set_rotation(angle - PI / 2)
 
 func set_anim(anim = "", wait = false):
 	if wait_anim.length() > 0:
@@ -86,13 +105,13 @@ func _on_Enemy_input_event(viewport, event, shape_idx):
 func generate_state():
 	$StateTimer.wait_time = randi() % 3 + 3 # 每3-5s换一次模式
 	var value = randf()
-	if value < 0.3:
+	if value < 0.4:
 		state =  "simple_shoot"
-	elif value < 0.5:
-		state =  "chase"
 	elif value < 0.6:
+		state =  "chase"
+	elif value < 0.7:
 		state =  "color_change"
-	elif value < 0.8:
+	elif value < 0.9:
 		state =  "circle_shoot"
 	else:
 		state =  "wait"
@@ -106,7 +125,10 @@ func chase():
 		collision.collider.get_hurt(0.1)
 
 func color_change():
-	var color = get_node("Sprite").material.get_shader_param("color")
+	if is_color_changing:
+		return
+	is_color_changing = true
+	color = get_node("Sprite").material.get_shader_param("color")
 	color.r = randi() % 2
 	color.g = randi() % 2
 	color.b = randi() % 2
@@ -114,6 +136,9 @@ func color_change():
 		color.r = randi() % 2
 		color.g = randi() % 2
 		color.b = randi() % 2
+	set_anim("Jump", true)
+	yield(get_tree().create_timer(0.3), "timeout")
+	is_color_changing = false
 	Util.set_color(get_node("Sprite").material, color)
 	generate_state()
 
@@ -130,16 +155,26 @@ func circle_shoot():
 		velocity = velocity.rotated(2 * PI / 12)
 		bullet_velocities.append(velocity)
 	set_anim("Jump", true)
-	yield(get_tree().create_timer(0.45), "timeout")
+	yield(get_tree().create_timer(0.3), "timeout")
 	shoot(bullet_velocities)
 	generate_state()
 	
+func simple_shoot():
+	if is_simple_shooting:
+		return
+	is_simple_shooting = true
+	for i in range(5):
+		self_to_player = (get_node("/root/World/Player").get_global_position() - get_global_position()).normalized()
+		shoot([self_to_player])
+		yield(get_tree().create_timer(0.4), "timeout")
+	is_simple_shooting = false
+
 func createBullet(velocity):
 	var bullet = load("res://Scenes/Guns/EnemyBullet.tscn").instance()
 	get_node("/root/World").add_child(bullet)
 	var color = get_node("Sprite").material.get_shader_param("color")
 	bullet.set_color(color)
-	bullet.set_global_position(get_global_position())
+	bullet.set_global_position(gun.get_global_position() + self_to_player * 50)
 	bullet.linear_velocity = velocity * bullet_speed
 	bullet.sender = self
 

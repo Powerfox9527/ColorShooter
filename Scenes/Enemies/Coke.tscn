@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorExceptGray.gdshader" type="Shader" id=2]
 [ext_resource path="res://Sprites/Enemies/CokeLight.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Guns/CokeGun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
@@ -128,3 +129,5 @@ energy = 16.0
 
 [node name="StateTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="Gun" parent="." instance=ExtResource( 4 )]
