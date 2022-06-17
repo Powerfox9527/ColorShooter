@@ -70,6 +70,8 @@ func set_anim(anim = "", wait = false):
 	if anim.length() > 0 and animator.get_animation(anim) != null:	
 		if wait:
 			wait_anim = anim
+		var animation = animator.get_animation(anim)
+		animation.set_loop(false)
 		animator.play(anim)
 		return
 	angle = Vector2.UP.angle_to(self_to_player)
@@ -88,9 +90,10 @@ func get_hurt(amount):
 	var color = get_node("Sprite").material.get_shader_param("color")
 	color.a -= float(amount) / 100.0
 	if color.a > 0:
-		get_node("Light2D").visible = true
-		yield(get_tree().create_timer(hurt_time), "timeout")
-		get_node("Light2D").visible = false
+		if angle < PI / 2 and angle > -1 * PI/2:
+			set_anim("BackHurt", true)
+		else:
+			set_anim("Hurt", true)
 		Util.set_color(get_node("Sprite").material, color)
 	else:
 		dead()

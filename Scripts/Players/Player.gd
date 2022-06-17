@@ -19,8 +19,7 @@ export var gun_radius = 20
 export var gun_offset = Vector2(5, 15)
 export var roll_distance = 400
 export var hurt_time = 1
-export var visible_internal = 0.2
-var visible_recorder = 0
+export var defense = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -113,8 +112,8 @@ func get_hurt(hurt_color):
 	if hurt_color.gray() <= 0:
 		print("No Hurt Amount")
 		return
-	if wait_anim == "Roll" or wait_anim == "BackRoll":
-		print("It's in roll")
+	if wait_anim.length() > 0:
+		print("It's in wait_anim")
 		return
 	if angle < PI / 2 and angle > -1 * PI/2:
 		set_anim("BackHurt", true)
@@ -125,11 +124,11 @@ func get_hurt(hurt_color):
 	amount += hurt_color.r - color.r
 	amount += hurt_color.g - color.g
 	amount += hurt_color.b - color.b
-	color.r -= max(color.r, hurt_color.r) / 100.0
-	color.g -= max(color.g, hurt_color.g) / 100.0
-	color.b -= max(color.b, hurt_color.b) / 100.0
+	color.r -= min(color.r, hurt_color.r) / defense
+	color.g -= min(color.g, hurt_color.g) / defense
+	color.b -= min(color.b, hurt_color.b) / defense
 	if amount > 0:
-		color.a -= float(amount) / 100.0
+		color.a -= float(amount) / defense
 	if color.a > 0:
 		Util.set_color(get_node("PlayerSprite").material, color)
 	else:
