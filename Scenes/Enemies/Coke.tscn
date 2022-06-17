@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorExceptGray.gdshader" type="Shader" id=2]
@@ -45,7 +45,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.4
+length = 0.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -58,6 +58,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0.0, 1.0, 2.0, 3.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Gun:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -73,6 +85,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10.0, 11.0, 12.0, 13.0, 14.0, 15.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Gun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 2.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -93,6 +121,9 @@ tracks/0/keys = {
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 14.5, 25.8 )
+
+[sub_resource type="StreamTexture" id=12]
+load_path = "res://.import/BossGun.png-88ff260eccb3b52170d5becd8daa06cd.stex"
 
 [node name="Coke" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
@@ -116,6 +147,7 @@ anims/BackIdle = SubResource( 2 )
 anims/BackWalk = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/Jump = SubResource( 9 )
+anims/Shoot = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -131,3 +163,4 @@ energy = 16.0
 autostart = true
 
 [node name="Gun" parent="." instance=ExtResource( 4 )]
+texture = SubResource( 12 )

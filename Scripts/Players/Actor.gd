@@ -26,10 +26,21 @@ var visible_recorder = 0
 func _ready():
 	Util.set_color(get_node("PlayerSprite").material, color)
 	$AnimationPlayer.connect("animation_finished", self, "_on_anim_finished")
+	$HurtTimer.wait_time = hurt_time
+	$HurtTimer.connect("timeout", self, "stop_hurt_timer")
 
 func _physics_process(delta):
 	move(delta)
 	update_gun(delta)
+	if not $HurtTimer.is_stopped():
+		if visible_recorder > visible_internal + delta:
+			set_visible(false)
+			visible_recorder = 0
+		else:
+			set_visible(true)
+			visible_recorder += delta
+	elif not is_visible():
+		set_visible(true)
 	
 
 func move(delta):
@@ -80,8 +91,6 @@ func set_anim(anim = "", wait = false):
 	if anim.length() > 0 and animator.get_animation(anim) != null:	
 		if wait:
 			wait_anim = anim
-		var animation = animator.get_animation(anim)
-		animation.set_loop(false)
 		animator.play(anim)
 		state = anim
 		return
@@ -108,29 +117,20 @@ func _on_anim_finished(anim_name):
 	if anim_name == wait_anim:
 		wait_anim = "" # Replace with function body.
 		$Gun.visible = true
-
-func get_hurt(hurt_color):
-	if hurt_color.gray() <= 0:
+		
+func get_hurt(amount):
+	if amount < 0:
 		print("No Hurt Amount")
 		return
-	if wait_anim == "Roll" or wait_anim == "BackRoll":
-		print("It's in roll")
+	if not $HurtTimer.is_stopped():
 		return
-	if angle < PI / 2 and angle > -1 * PI/2:
-		set_anim("BackHurt", true)
-	else:
-		set_anim("Hurt", true)
 	var color = get_node("PlayerSprite").material.get_shader_param("color")
-	var amount = 0
-	amount += hurt_color.r - color.r
-	amount += hurt_color.g - color.g
-	amount += hurt_color.b - color.b
-	color.r -= max(color.r, hurt_color.r) / 100.0
-	color.g -= max(color.g, hurt_color.g) / 100.0
-	color.b -= max(color.b, hurt_color.b) / 100.0
-	if amount > 0:
-		color.a -= float(amount) / 100.0
+	color.a -= float(amount) / 100.0
+	$HurtTimer.start()
 	if color.a > 0:
 		Util.set_color(get_node("PlayerSprite").material, color)
 	else:
 		queue_free()
+
+func stop_hurt_timer():
+	$HurtTimer.stop()

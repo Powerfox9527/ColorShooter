@@ -17,7 +17,6 @@
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-visible = false
 position = Vector2( 960, 540 )
 texture = ExtResource( 3 )
 
