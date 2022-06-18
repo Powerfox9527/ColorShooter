@@ -1,1 +1,1 @@
-1 Player 2 Enemy 3 Player Bullet 4 Enemy Bullet 5 Explosion 6 Wall 7 Chest
+1 Player 2 Enemy 3 Player Bullet 4 Enemy Bullet 5 Explosion 6 Wall 7 Chest 8 Player Anim

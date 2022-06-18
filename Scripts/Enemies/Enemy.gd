@@ -7,9 +7,6 @@ var wait_anim = ""
 var state = "chase"
 var is_in_state = false
 var color = Color(0, 0, 0, 0)
-onready var gun = get_node("Gun")
-export var gun_radius = 0
-export var gun_offset = Vector2(100, 85)
 onready var animator = get_node("AnimationPlayer")
 export var hurt_time = 0.1 
 export var speed = 3
@@ -35,7 +32,6 @@ func _process(delta):
 	else:
 		get_node("Sprite").set_flip_h(false)
 	color = get_node("Sprite").material.get_shader_param("color")
-	update_gun(delta)
 	if is_in_state:
 		return
 	is_in_state = true
@@ -47,20 +43,7 @@ func _process(delta):
 		simple_shoot()
 	elif state == "circle_shoot":
 		circle_shoot()
-	
-	
-func update_gun(delta):
-	# gun position and rotation and layer
-	var angle = Vector2.UP.angle_to(self_to_player)
-	var offset = gun_offset
-	if angle < 0:
-		offset.x = -offset.x
-	gun.set_global_position(get_global_position() + self_to_player * gun_radius + offset)
-	if angle < 0:
-		gun.set_scale(Vector2(1, -1))
-	else:
-		gun.set_scale(Vector2(1, 1))
-	gun.set_rotation(angle - PI / 2)
+
 
 func set_anim(anim = "", wait = false):
 	if wait_anim.length() > 0:
@@ -165,7 +148,7 @@ func createBullet(velocity):
 	get_node("/root/World").add_child(bullet)
 	var color = get_node("Sprite").material.get_shader_param("color")
 	bullet.set_color(color)
-	bullet.set_global_position(gun.get_global_position() + self_to_player * 50)
+	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = velocity * bullet_speed
 	bullet.sender = self
 

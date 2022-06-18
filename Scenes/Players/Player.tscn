@@ -38,7 +38,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=24]
 length = 0.64
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -106,7 +105,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=22]
 length = 0.64
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -167,17 +165,18 @@ anims/Roll = SubResource( 22 )
 anims/Shoot = SubResource( 27 )
 anims/Walk = SubResource( 23 )
 
+[node name="Gun" parent="." instance=ExtResource( 4 )]
+
 [node name="PlayerSprite" type="Sprite" parent="."]
 material = SubResource( 16 )
 position = Vector2( 1, 1 )
 texture = SubResource( 30 )
 hframes = 6
 vframes = 6
+frame = 20
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvUGxheWVycy9QbGF5ZXIuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
-
-[node name="Gun" parent="." instance=ExtResource( 4 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 4 )
@@ -185,3 +184,5 @@ shape = SubResource( 18 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="Timer" type="Timer" parent="."]

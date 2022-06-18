@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorOnlyGray.gdshader" type="Shader" id=2]
-[ext_resource path="res://Scenes/Guns/CokeGun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
@@ -79,24 +78,12 @@ tracks/0/keys = {
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Gun:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
@@ -122,18 +109,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=11]
 length = 0.2
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Gun:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 1.0, 2.0 ]
-}
 
 [sub_resource type="Animation" id=5]
 length = 0.7
@@ -153,9 +128,6 @@ tracks/0/keys = {
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 14.5, 25.8 )
-
-[sub_resource type="StreamTexture" id=12]
-load_path = "res://.import/BossGun.png-88ff260eccb3b52170d5becd8daa06cd.stex"
 
 [node name="Coke" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
@@ -190,6 +162,3 @@ shape = SubResource( 6 )
 
 [node name="StateTimer" type="Timer" parent="."]
 autostart = true
-
-[node name="Gun" parent="." instance=ExtResource( 4 )]
-texture = SubResource( 12 )

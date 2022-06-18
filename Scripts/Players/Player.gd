@@ -46,6 +46,7 @@ func move(delta):
 	if wait_anim.length() <= 0:
 		move_and_slide(velocity)
 		self_to_mouse = (get_global_mouse_position() - get_position()).normalized()
+		set_move_anim()
 	elif wait_anim == "Roll" or wait_anim == "BackRoll":
 		move_and_slide(self_to_mouse * roll_distance)
 	
@@ -54,7 +55,6 @@ func move(delta):
 		get_node("PlayerSprite").set_flip_h(true)
 	else:
 		get_node("PlayerSprite").set_flip_h(false)
-	set_anim()
 	
 func update_gun(delta):
 	if Input.is_action_pressed("shoot"):
@@ -83,8 +83,13 @@ func set_anim(anim = "", wait = false):
 		animation.set_loop(false)
 		animator.play(anim)
 		state = anim
+		set_collision_layer(8)
 		return
-	angle = Vector2.UP.angle_to(self_to_mouse)
+
+		
+func set_move_anim():
+	var anim = ""
+	var animator = get_node("AnimationPlayer")
 	if angle < PI / 2 and angle > -1 * PI/2:
 		anim += "Back"
 	if velocity.length() > 0:
@@ -107,6 +112,7 @@ func _on_anim_finished(anim_name):
 	if anim_name == wait_anim:
 		wait_anim = "" # Replace with function body.
 		$Gun.visible = true
+		set_collision_layer(1)
 
 func get_hurt(hurt_color):
 	if hurt_color.gray() <= 0:
@@ -132,4 +138,7 @@ func get_hurt(hurt_color):
 	if color.a > 0:
 		Util.set_color(get_node("PlayerSprite").material, color)
 	else:
-		queue_free()
+		dead()
+		
+func dead():
+	$Gun.set_visible(false)
