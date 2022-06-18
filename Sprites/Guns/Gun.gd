@@ -4,6 +4,7 @@ var last_shoot_time = 0
 export var shoot_interval = 0.1
 export var bullet_speed = 300
 export (float) var ammo_expense = 10
+export var power = 5
 onready var player = get_node("..")
 onready var animator = get_node("AnimationPlayer")
 
@@ -42,6 +43,7 @@ func createBullet():
 	var color = get_node("..").color
 	var self_to_mouse = get_node("..").self_to_mouse
 	bullet.set_color(color)
+	bullet.power = power
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = self_to_mouse / self_to_mouse.length() * bullet_speed
 	color.r -= ammo_expense / 100 * color.r

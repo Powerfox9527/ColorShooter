@@ -1,7 +1,7 @@
 class_name Bullet
 extends RigidBody2D
 
-export var power = 5
+var power = 5
 var sender
 
 func _ready():

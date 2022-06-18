@@ -52,7 +52,7 @@ func move(delta):
 		self_to_mouse = (get_global_mouse_position() - get_position()).normalized()
 		set_move_anim()
 	elif wait_anim == "Roll" or wait_anim == "BackRoll":
-		move_and_slide(velocity.normalized() * roll_distance)
+		move_and_slide(self_to_mouse * roll_distance)
 	
 	angle = Vector2.UP.angle_to(self_to_mouse)
 	if angle < 0:
@@ -73,6 +73,10 @@ func update_gun(delta):
 		gun.set_scale(Vector2(1, -1))
 	else:
 		gun.set_scale(Vector2(1, 1))
+	if angle < PI / 2 and angle > -1 * PI/2:
+		move_child(gun, 0)
+	else:
+		move_child(gun, get_child_count() - 1)
 	gun.set_rotation(angle - PI / 2)
 	
 func set_anim(anim = "", wait = false):
