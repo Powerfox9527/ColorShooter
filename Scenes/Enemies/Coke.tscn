@@ -127,7 +127,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14.5, 25.8 )
+extents = Vector2( 13.6, 21.5 )
 
 [node name="Coke" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
@@ -157,7 +157,8 @@ anims/Shoot = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.0999998, 6 )
+position = Vector2( 9.53674e-08, 5.7 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
 
 [node name="StateTimer" type="Timer" parent="."]

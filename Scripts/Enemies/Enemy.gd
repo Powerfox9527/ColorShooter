@@ -126,10 +126,10 @@ func circle_shoot():
 	if wait_anim == "Jump":
 		return
 	var bullet_velocities = []
-	var velocity = Vector2.UP
+	var bullet_velocity = Vector2.UP
 	for i in range(12):
-		velocity = velocity.rotated(2 * PI / 12)
-		bullet_velocities.append(velocity)
+		bullet_velocity = velocity.rotated(2 * PI / 12)
+		bullet_velocities.append(bullet_velocity)
 	set_anim("Jump", true)
 	yield(get_tree().create_timer(0.3), "timeout")
 	shoot(bullet_velocities)
@@ -147,6 +147,7 @@ func createBullet(velocity):
 	var bullet = load("res://Scenes/Guns/EnemyBullet.tscn").instance()
 	get_node("/root/World").add_child(bullet)
 	var color = get_node("Sprite").material.get_shader_param("color")
+	color.a = 1
 	bullet.set_color(color)
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = velocity * bullet_speed
@@ -154,10 +155,10 @@ func createBullet(velocity):
 
 func dead():
 	var bullet_velocities = []
-	var velocity = Vector2.UP
+	var bullet_velocity = Vector2.UP
 	for i in range(12):
-		velocity = velocity.rotated(2 * PI / 12)
-		bullet_velocities.append(velocity)
+		bullet_velocity = bullet_velocity.rotated(2 * PI / 12)
+		bullet_velocities.append(bullet_velocity)
 	set_anim("Jump", true)
 	shoot(bullet_velocities)
 	generate_state()

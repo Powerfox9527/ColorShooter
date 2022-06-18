@@ -3,8 +3,10 @@ extends Sprite
 var last_shoot_time = 0
 export var shoot_interval = 0.1
 export var bullet_speed = 300
+export (float) var ammo_expense = 10
 onready var player = get_node("..")
 onready var animator = get_node("AnimationPlayer")
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -42,4 +44,8 @@ func createBullet():
 	bullet.set_color(color)
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = self_to_mouse / self_to_mouse.length() * bullet_speed
+	color.r -= ammo_expense / 100 * color.r
+	color.g -= ammo_expense / 100 * color.g
+	color.b -= ammo_expense / 100 * color.b
+	get_node("..").set_color(color)
 	bullet.sender = get_node("..")

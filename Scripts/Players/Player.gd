@@ -19,7 +19,8 @@ export var gun_radius = 20
 export var gun_offset = Vector2(5, 15)
 export var roll_distance = 400
 export var hurt_time = 1
-export var defense = 20
+export var defense = 10
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,10 @@ func _ready():
 func _physics_process(delta):
 	move(delta)
 	update_gun(delta)
-	
+
+func set_color(new_color):
+	color = new_color
+	Util.set_color(get_node("PlayerSprite").material, new_color)
 
 func move(delta):
 	if Input.is_action_just_pressed("roll"):
@@ -48,7 +52,7 @@ func move(delta):
 		self_to_mouse = (get_global_mouse_position() - get_position()).normalized()
 		set_move_anim()
 	elif wait_anim == "Roll" or wait_anim == "BackRoll":
-		move_and_slide(self_to_mouse * roll_distance)
+		move_and_slide(velocity.normalized() * roll_distance)
 	
 	angle = Vector2.UP.angle_to(self_to_mouse)
 	if angle < 0:
@@ -125,7 +129,7 @@ func get_hurt(hurt_color):
 		set_anim("BackHurt", true)
 	else:
 		set_anim("Hurt", true)
-	var color = get_node("PlayerSprite").material.get_shader_param("color")
+	color = get_node("PlayerSprite").material.get_shader_param("color")
 	var amount = 0
 	amount += hurt_color.r - color.r
 	amount += hurt_color.g - color.g
