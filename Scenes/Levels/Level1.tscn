@@ -100,3 +100,6 @@ tile_data = PoolIntArray( -65537, 9, 0, -131071, 8, 0 )
 
 [node name="Coke" parent="." instance=ExtResource( 12 )]
 position = Vector2( -129, 297 )
+
+[node name="Coke2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 527, 768 )

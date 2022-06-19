@@ -135,6 +135,8 @@ scale = Vector2( 5, 5 )
 collision_layer = 2
 script = ExtResource( 1 )
 speed = 70
+gun_radius = 0
+gun_offset = Vector2( 25, 20 )
 color = Color( 1, 0, 0, 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]

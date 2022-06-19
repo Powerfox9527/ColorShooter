@@ -38,6 +38,7 @@ tracks/0/keys = {
 }
 
 [node name="Gun" type="Sprite"]
+position = Vector2( -10, 0 )
 texture = SubResource( 18 )
 hframes = 2
 vframes = 2

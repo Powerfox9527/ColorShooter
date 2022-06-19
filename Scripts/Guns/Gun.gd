@@ -37,19 +37,9 @@ func create_bullet(velocity, ignore_interval = false):
 		last_shoot_time = shoot_interval
 	var bullet = load(bullet_path).instance()
 	get_node("/root/World/BulletGroup").add_child(bullet)
-	var player = get_node("..")
-	var color = player.color
-	color.r -= min(ammo_expense / 100 * color.r, color.r)
-	color.g -= min(ammo_expense / 100 * color.g, color.g)
-	color.b -= min(ammo_expense / 100 * color.b, color.b)
-	var self_to_target = player.self_to_target
-	bullet.set_color(color)
-	bullet.power = power
+	bullet.init(player)
 	bullet.set_global_position(get_global_position())
 	bullet.linear_velocity = velocity.normalized()* bullet_speed
-	bullet.set_collision_layer(player.get_collision_layer())
-	bullet.set_collision_mask(player.get_collision_mask())
-	bullet.sender = player
 	# anim
 	if animator.get_current_animation() != "Shoot":
 		animator.set_current_animation("Shoot")

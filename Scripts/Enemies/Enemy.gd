@@ -43,7 +43,6 @@ func generate_state():
 		state =  "color_change"
 	elif value < 1:
 		state =  "circle_shoot"
-	state = "circle_shoot"
 	print(state)
 		
 func chase():
@@ -63,6 +62,7 @@ func color_change():
 		new_color.r = randi() % 2
 		new_color.g = randi() % 2
 		new_color.b = randi() % 2
+	new_color.a = color.a
 	set_anim("Jump", true)
 	yield(get_tree().create_timer(0.3), "timeout")
 	set_color(new_color)

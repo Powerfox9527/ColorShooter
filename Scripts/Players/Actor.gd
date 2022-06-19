@@ -20,6 +20,9 @@ var state = ""
 func _ready():
 	Util.set_color(sprite.material, color)
 	animator.connect("animation_finished", self, "_on_anim_finished")
+	gun_radius *= get_scale().x
+	gun_offset *= get_scale().x
+	gun.power = attack
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)
