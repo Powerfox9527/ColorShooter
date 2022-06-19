@@ -134,9 +134,11 @@ extents = Vector2( 13.6, 21.5 )
 scale = Vector2( 5, 5 )
 collision_layer = 2
 script = ExtResource( 1 )
+speed = 70
 color = Color( 1, 0, 0, 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
+position = Vector2( 24.6, 10.6 )
 
 [node name="ActorSprite" type="Sprite" parent="."]
 material = SubResource( 7 )

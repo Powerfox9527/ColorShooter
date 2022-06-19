@@ -16,7 +16,9 @@ onready var animator = get_node("AnimationPlayer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var animation = animator.get_animation("Shoot")
+	if animation:
+		animation.set_loop(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,17 +30,11 @@ func _physics_process(delta):
 	if last_shoot_time > 0:
 		last_shoot_time -= delta
 
-	if Input.is_action_pressed("shoot"):
-		anim += "Shoot"
-	else:
-		anim += "Idle"
-	if animator.get_current_animation() != anim:
-		animator.set_current_animation(anim)
-
-func create_bullet(velocity):
-	if last_shoot_time > 0:
+func create_bullet(velocity, ignore_interval = false):
+	if last_shoot_time > 0 and !ignore_interval:
 		return
-	last_shoot_time = shoot_interval
+	if !ignore_interval:
+		last_shoot_time = shoot_interval
 	var bullet = load(bullet_path).instance()
 	get_node("/root/World/BulletGroup").add_child(bullet)
 	var player = get_node("..")
@@ -54,5 +50,6 @@ func create_bullet(velocity):
 	bullet.set_collision_layer(player.get_collision_layer())
 	bullet.set_collision_mask(player.get_collision_mask())
 	bullet.sender = player
-	if bullet.sender.has_method("set_color"):
-		bullet.sender.set_color(color)
+	# anim
+	if animator.get_current_animation() != "Shoot":
+		animator.set_current_animation("Shoot")

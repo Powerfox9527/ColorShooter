@@ -3,9 +3,9 @@ extends Actor
 
 export var roll_distance = 400
 
-
-# Called when the node enters the scene tree for the first time.
-
+func _ready():
+	$HurtTimer.connect("timeout", self, "_on_hurt_timeout")
+	$RollTimer.connect("timeout", self, "_on_roll_timeout")
 func _physics_process(delta):
 	move(delta)
 	update_gun(delta)
@@ -28,7 +28,8 @@ func move(delta):
 		move_and_slide(velocity)
 		self_to_target = (get_global_mouse_position() - get_position()).normalized()
 		.set_move_anim()
-	elif wait_anim == "Roll" or wait_anim == "BackRoll":
+	
+	if !$RollTimer.is_stopped():
 		move_and_slide(self_to_target * roll_distance)
 	
 	angle = Vector2.UP.angle_to(self_to_target)
@@ -50,6 +51,12 @@ func roll():
 	else:
 		set_anim("Roll", true)
 	set_collision_layer(8)
+	var length = animator.get_animation("Roll").get_length()
+	$RollTimer.set_wait_time(length - 0.1)
+	$RollTimer.start()
+
+func _on_roll_timeout():
+	$RollTimer.stop()
 
 ### anim
 func _on_anim_finished(anim_name):
@@ -60,6 +67,9 @@ func _on_anim_finished(anim_name):
 
 ### hurt
 func get_hurt(hurt_color):
+	if !$HurtTimer.is_stopped():
+		# print("It's in hurting")
+		return
 	if hurt_color.gray() <= 0:
 		print("No Hurt Amount")
 		return
@@ -70,13 +80,14 @@ func get_hurt(hurt_color):
 		set_anim("BackHurt", true)
 	else:
 		set_anim("Hurt", true)
-	set_collision_layer(8)
-	color = sprite.material.get_shader_param("color")
-	color = Util.get_hurt_amount(color, hurt_color)
-	if color.a > 0:
-		Util.set_color(sprite.material, color)
-	else:
+	set_color(Util.get_hurt_amount(color, hurt_color / defense))
+	if color.a <= 0:
 		dead()
-		
+	$HurtTimer.start()
+
+func _on_hurt_timeout():
+	$HurtTimer.stop()
+
+
 func dead():
 	gun.set_visible(false)

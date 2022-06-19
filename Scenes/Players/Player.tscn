@@ -142,7 +142,7 @@ tracks/0/keys = {
 
 [sub_resource type="ShaderMaterial" id=16]
 shader = ExtResource( 1 )
-shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StreamTexture" id=30]
 load_path = "res://.import/Player.png-6696d0cab733bf371608b7eb27bafeea.stex"
@@ -187,3 +187,9 @@ shape = SubResource( 18 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="RollTimer" type="Timer" parent="."]
+wait_time = 0.3

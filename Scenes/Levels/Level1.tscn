@@ -86,7 +86,7 @@ format = 1
 tile_data = PoolIntArray( -131073, 7, 0, -65537, 4, 0, -131071, 6, 0 )
 
 [node name="BloackTileMap2" type="TileMap" parent="."]
-position = Vector2( 0, -96 )
+position = Vector2( 0, -120 )
 scale = Vector2( 6, 6 )
 tile_set = ExtResource( 11 )
 cell_size = Vector2( 16, 16 )
@@ -99,3 +99,4 @@ tile_data = PoolIntArray( -65537, 9, 0, -131071, 8, 0 )
 [node name="BulletGroup" type="Node2D" parent="."]
 
 [node name="Coke" parent="." instance=ExtResource( 12 )]
+position = Vector2( -129, 297 )

@@ -15,7 +15,7 @@ static func set_color(material, new_color):
 	new_color.b = min(1.0, new_color.b)
 	material.set_shader_param("color", new_color)
 	
-static func get_hurt_amount(color, hurt_color):
+static func get_hurt_amount(color, hurt_color, is_enemy = false):
 	var amount = 0
 	amount += hurt_color.r - color.r
 	amount += hurt_color.g - color.g
@@ -24,7 +24,9 @@ static func get_hurt_amount(color, hurt_color):
 	color.g -= min(color.g, hurt_color.g)
 	color.b -= min(color.b, hurt_color.b)
 	if amount > 0:
-		color.a -= max(amount, color.a)
+		color.a -= min(amount, color.a)
+	if is_enemy:
+		color.a -= min(hurt_color.a, color.a)
 	return color
 
 static func multiply_color(multiplier, color, m_alpha = false):

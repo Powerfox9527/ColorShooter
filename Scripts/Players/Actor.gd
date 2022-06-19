@@ -12,8 +12,8 @@ export var speed = 300
 export var hurt_time = 0.1
 export var gun_radius = 20
 export var gun_offset = Vector2(5, 15)
-export var attack = 10
-export var defense = 10
+export (float) var attack = 10
+export (float) var defense = 20
 export var color = Color(0, 0, 0, 1)
 var state = ""
 
@@ -22,8 +22,11 @@ func _ready():
 	animator.connect("animation_finished", self, "_on_anim_finished")
 
 func set_color(new_color):
-	color = new_color
-	Util.set_color(sprite.material, new_color)
+	color.r = min(max(0, new_color.r), 1)
+	color.g = min(max(0, new_color.g), 1)
+	color.b = min(max(0, new_color.b), 1)
+	color.a = min(max(0, new_color.a), 1)
+	Util.set_color(sprite.material, color)
 
 func update_gun(delta):
 	# gun position and rotation and layer
@@ -57,7 +60,6 @@ func set_move_anim():
 func set_anim(anim, wait = false):
 	if wait_anim.length() > 0:
 		return
-	var animator = get_node("AnimationPlayer")
 	var animation = animator.get_animation(anim)
 	if anim.length() > 0 and animation != null:	
 		if wait:
