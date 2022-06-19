@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorOnlyGray.gdshader" type="Shader" id=2]
+[ext_resource path="res://Scenes/Guns/CokeGun.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
@@ -14,7 +15,7 @@ load_path = "res://.import/Body.png-b14e6744cb00b4b1638a4a85f100f2b4.stex"
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -30,7 +31,7 @@ tracks/0/keys = {
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -46,7 +47,7 @@ tracks/0/keys = {
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -62,7 +63,7 @@ tracks/0/keys = {
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -78,7 +79,7 @@ tracks/0/keys = {
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -94,7 +95,7 @@ tracks/0/keys = {
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -114,7 +115,7 @@ loop = true
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("ActorSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -132,16 +133,18 @@ extents = Vector2( 13.6, 21.5 )
 [node name="Coke" type="KinematicBody2D"]
 scale = Vector2( 5, 5 )
 collision_layer = 2
-collision_mask = 5
 script = ExtResource( 1 )
+color = Color( 1, 0, 0, 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Gun" parent="." instance=ExtResource( 3 )]
+
+[node name="ActorSprite" type="Sprite" parent="."]
 material = SubResource( 7 )
 position = Vector2( 2.38419e-07, -0.4 )
 texture = SubResource( 13 )
 hframes = 6
 vframes = 5
-frame = 10
+frame = 17
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvRW5lbWllcy9Db2tlLmFzZXByaXRlCmxheWVyfD1Cb2R5Cm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
 }
@@ -158,7 +161,6 @@ anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 9.53674e-08, 5.7 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
 
 [node name="StateTimer" type="Timer" parent="."]

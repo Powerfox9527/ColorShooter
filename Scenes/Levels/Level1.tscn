@@ -25,9 +25,6 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0 )
 
-[node name="Coke" parent="." instance=ExtResource( 12 )]
-position = Vector2( 608, 292 )
-
 [node name="Mouse" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -77,3 +74,28 @@ texture_progress = ExtResource( 13 )
 [node name="Background" type="Sprite" parent="."]
 scale = Vector2( 20, 20 )
 texture = ExtResource( 3 )
+
+[node name="BloackTileMap1" type="TileMap" parent="."]
+scale = Vector2( 6, 6 )
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_layer = 32
+collision_mask = 31
+format = 1
+tile_data = PoolIntArray( -131073, 7, 0, -65537, 4, 0, -131071, 6, 0 )
+
+[node name="BloackTileMap2" type="TileMap" parent="."]
+position = Vector2( 0, -96 )
+scale = Vector2( 6, 6 )
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+collision_layer = 32
+collision_mask = 31
+format = 1
+tile_data = PoolIntArray( -65537, 9, 0, -131071, 8, 0 )
+
+[node name="BulletGroup" type="Node2D" parent="."]
+
+[node name="Coke" parent="." instance=ExtResource( 12 )]

@@ -9,17 +9,22 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://Scripts/Players/Actor.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://Scripts/Guns/Bullet.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Scripts/Enemies/Enemy.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Actor",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Players/Player.gd"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Utils/Util.gd"
 } ]
 _global_script_class_icons={
+"Actor": "",
 "Bullet": "",
 "Enemy": "",
 "Player": "",

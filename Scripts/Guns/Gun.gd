@@ -5,6 +5,7 @@ export var shoot_interval = 0.1
 export var bullet_speed = 300
 export (float) var ammo_expense = 10
 export var power = 5
+export var bullet_path = "res://Scenes/Guns/Bullet.tscn"
 onready var player = get_node("..")
 onready var animator = get_node("AnimationPlayer")
 
@@ -20,7 +21,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-#	var angle = Vector2.UP.angle_to(get_node("..").self_to_mouse)
+#	var angle = Vector2.UP.angle_to(get_node("..").self_to_target)
 	var anim = ""
 #	if abs(angle) < PI / 2:
 #		anim += "Back"
@@ -34,20 +35,24 @@ func _physics_process(delta):
 	if animator.get_current_animation() != anim:
 		animator.set_current_animation(anim)
 
-func createBullet():
+func create_bullet(velocity):
 	if last_shoot_time > 0:
 		return
 	last_shoot_time = shoot_interval
-	var bullet = load("res://Scenes/Guns/Bullet.tscn").instance()
-	get_node("/root/World").add_child(bullet)
-	var color = get_node("..").color
-	var self_to_mouse = get_node("..").self_to_mouse
+	var bullet = load(bullet_path).instance()
+	get_node("/root/World/BulletGroup").add_child(bullet)
+	var player = get_node("..")
+	var color = player.color
+	color.r -= min(ammo_expense / 100 * color.r, color.r)
+	color.g -= min(ammo_expense / 100 * color.g, color.g)
+	color.b -= min(ammo_expense / 100 * color.b, color.b)
+	var self_to_target = player.self_to_target
 	bullet.set_color(color)
 	bullet.power = power
 	bullet.set_global_position(get_global_position())
-	bullet.linear_velocity = self_to_mouse / self_to_mouse.length() * bullet_speed
-	color.r -= ammo_expense / 100 * color.r
-	color.g -= ammo_expense / 100 * color.g
-	color.b -= ammo_expense / 100 * color.b
-	get_node("..").set_color(color)
-	bullet.sender = get_node("..")
+	bullet.linear_velocity = velocity.normalized()* bullet_speed
+	bullet.set_collision_layer(player.get_collision_layer())
+	bullet.set_collision_mask(player.get_collision_mask())
+	bullet.sender = player
+	if bullet.sender.has_method("set_color"):
+		bullet.sender.set_color(color)

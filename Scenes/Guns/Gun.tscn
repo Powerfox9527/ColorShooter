@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/Guns/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Guns/Gun.gd" type="Script" id=1]
 
 [sub_resource type="StreamTexture" id=18]
 load_path = "res://.import/Gun.png-e577dccd87d109f000bc9d1536e55aef.stex"

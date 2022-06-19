@@ -17,8 +17,10 @@ func _process(delta):
 	if $Timer.is_stopped():
 		queue_free()
 
+func disappear():
+	queue_free()
 
 func _on_RigidBody2D_body_entered(body):
-	if body is Enemy:
-		body.get_hurt(power)
-		queue_free()
+	if body.has_method("get_hurt") and body != sender:
+		body.get_hurt(Util.multiply_color(power, get_node("Light2D").color))
+	disappear()

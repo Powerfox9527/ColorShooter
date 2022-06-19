@@ -15,9 +15,29 @@ static func set_color(material, new_color):
 	new_color.b = min(1.0, new_color.b)
 	material.set_shader_param("color", new_color)
 	
-static func minus_color(color, offset):
-	return color.rgb - offset.rgb
+static func get_hurt_amount(color, hurt_color):
+	var amount = 0
+	amount += hurt_color.r - color.r
+	amount += hurt_color.g - color.g
+	amount += hurt_color.b - color.b
+	color.r -= min(color.r, hurt_color.r)
+	color.g -= min(color.g, hurt_color.g)
+	color.b -= min(color.b, hurt_color.b)
+	if amount > 0:
+		color.a -= max(amount, color.a)
+	return color
 
+static func multiply_color(multiplier, color, m_alpha = false):
+	color.r *= multiplier
+	color.g *= multiplier
+	color.b *= multiplier
+	if m_alpha:
+		color.a *= multiplier
+	return color
+
+func yield_time(time):
+	yield(get_tree().create_timer(time), "timeout")
+	return
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
