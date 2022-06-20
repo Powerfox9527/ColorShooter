@@ -1,1 +1,1 @@
-1 Player 2 Enemy 3 Explosion 4 Wall 5 Collectable
+1 Player 2 Enemy 3 Bullet 4 Explosion 5 Wall 6 Collectable

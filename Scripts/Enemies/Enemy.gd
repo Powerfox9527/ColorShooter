@@ -30,6 +30,11 @@ func _physics_process(delta):
 		simple_shoot()
 	elif state == "circle_shoot":
 		circle_shoot()
+	if get_slide_count() > 0:
+		for i in range(get_slide_count()):
+			var collision = get_slide_collision(i)
+			if collision and collision.collider is Player:
+				collision.collider.get_hurt(color)
 
 ### state
 func generate_state():
@@ -48,9 +53,7 @@ func generate_state():
 func chase():
 	self_to_target = (player.get_global_position() - get_global_position()).normalized()
 	velocity = self_to_target * speed
-	var collision = move_and_collide(velocity)
-	if collision != null and collision.collider is Player:
-		collision.collider.get_hurt(color * 0.5)
+	move_and_slide(velocity)
 	is_in_state = false
 
 func color_change():
@@ -108,8 +111,9 @@ func get_hurt(hurt_color):
 func dead():
 	var bullet_velocities = []
 	var bullet_velocity = Vector2.UP
-	for i in range(12):
-		bullet_velocity = bullet_velocity.rotated(2 * PI / 12)
+	color.a = 1
+	for i in range(6):
+		bullet_velocity = bullet_velocity.rotated(2 * PI / 6)
 		bullet_velocities.append(bullet_velocity)
 	set_anim("Jump", true)
 	shoot(bullet_velocities)

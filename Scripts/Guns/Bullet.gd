@@ -28,7 +28,6 @@ func init(player):
 		player.set_color(color)
 	power = gun.power
 	set_color(color)
-	set_collision_layer(player.get_collision_layer())
 	set_collision_mask(player.get_collision_mask())
 
 func _on_RigidBody2D_body_entered(body):

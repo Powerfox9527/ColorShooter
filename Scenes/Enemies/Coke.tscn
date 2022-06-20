@@ -5,6 +5,7 @@
 [ext_resource path="res://Scenes/Guns/CokeGun.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/color = Color( 1, 0, 0, 1 )
 
@@ -134,7 +135,7 @@ extents = Vector2( 13.6, 21.5 )
 scale = Vector2( 5, 5 )
 collision_layer = 2
 script = ExtResource( 1 )
-speed = 70
+speed = 200
 gun_radius = 0
 gun_offset = Vector2( 25, 20 )
 color = Color( 1, 0, 0, 1 )

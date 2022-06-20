@@ -27,9 +27,6 @@ tile_data = PoolIntArray( -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0,
 
 [node name="Mouse" parent="." instance=ExtResource( 2 )]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 240, 246 )
-
 [node name="RGBBars" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
 
@@ -98,8 +95,9 @@ tile_data = PoolIntArray( -65537, 9, 0, -131071, 8, 0 )
 
 [node name="BulletGroup" type="Node2D" parent="."]
 
-[node name="Coke" parent="." instance=ExtResource( 12 )]
-position = Vector2( -129, 297 )
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -26.9998, 426 )
 
-[node name="Coke2" parent="." instance=ExtResource( 12 )]
-position = Vector2( 527, 768 )
+[node name="Coke" parent="." instance=ExtResource( 12 )]
+position = Vector2( -523, 228 )
+color = Color( 1, 0, 0, 0.0313726 )

@@ -15,14 +15,14 @@ func move(delta):
 	if Input.is_action_just_pressed("roll"):
 		roll()
 	velocity = Vector2.ZERO
-	if Input.get_action_strength("left"):
-		velocity.x += -Input.get_action_strength("left")
-	if Input.get_action_strength("right"):
-		velocity.x += Input.get_action_strength("right")
-	if Input.get_action_strength("up"):
-		velocity.y += -Input.get_action_strength("up")
-	if Input.get_action_strength("down"):
-		velocity.y += Input.get_action_strength("down")
+	if Input.get_action_strength("ui_left"):
+		velocity.x += -Input.get_action_strength("ui_left")
+	if Input.get_action_strength("ui_right"):
+		velocity.x += Input.get_action_strength("ui_right")
+	if Input.get_action_strength("ui_up"):
+		velocity.y += -Input.get_action_strength("ui_up")
+	if Input.get_action_strength("ui_down"):
+		velocity.y += Input.get_action_strength("ui_down")
 	if wait_anim.length() <= 0:
 		velocity = velocity.normalized() * speed
 		move_and_slide(velocity)
@@ -45,12 +45,13 @@ func update_gun(delta):
 	
 
 func roll():
+	$RollTimer.stop()
 	gun.visible = false
 	if angle < PI / 2 and angle > -1 * PI/2:
 		set_anim("BackRoll", true)
 	else:
 		set_anim("Roll", true)
-	set_collision_layer(8)
+	set_collision_layer(3)
 	var length = animator.get_animation("Roll").get_length()
 	$RollTimer.set_wait_time(length - 0.1)
 	$RollTimer.start()
@@ -64,6 +65,7 @@ func _on_anim_finished(anim_name):
 		wait_anim = "" # Replace with function body.
 		gun.visible = true
 		set_collision_layer(1)
+		$RollTimer.stop()
 
 ### hurt
 func get_hurt(hurt_color):
@@ -87,7 +89,6 @@ func get_hurt(hurt_color):
 
 func _on_hurt_timeout():
 	$HurtTimer.stop()
-
 
 func dead():
 	gun.set_visible(false)

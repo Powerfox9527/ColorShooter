@@ -17,9 +17,9 @@ static func set_color(material, new_color):
 	
 static func get_hurt_amount(color, hurt_color, is_enemy = false):
 	var amount = 0
-	amount += hurt_color.r - color.r
-	amount += hurt_color.g - color.g
-	amount += hurt_color.b - color.b
+	amount += max(hurt_color.r - color.r, 0)
+	amount += max(hurt_color.g - color.g, 0)
+	amount += max(hurt_color.b - color.b, 0)
 	color.r -= min(color.r, hurt_color.r)
 	color.g -= min(color.g, hurt_color.g)
 	color.b -= min(color.b, hurt_color.b)
