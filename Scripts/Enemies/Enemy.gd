@@ -48,10 +48,18 @@ func generate_state():
 		state =  "color_change"
 	elif value < 1:
 		state =  "circle_shoot"
+	state = "chase"
 	print(state)
 		
 func chase():
-	self_to_target = (player.get_global_position() - get_global_position()).normalized()
+	var navigation = get_node("/root/World/Navigation2D")
+	var player_pos = get_node("/root/World/Player").get_global_position()
+	# var point = navigation.get_simple_path(get_global_position(), dest)
+	var dest = navigation.get_simple_path(get_global_position(), player_pos)
+	if dest.empty():
+		is_in_state = false
+		return
+	self_to_target = (dest[1] - dest[0]).normalized()
 	velocity = self_to_target * speed
 	move_and_slide(velocity)
 	is_in_state = false

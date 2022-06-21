@@ -137,7 +137,7 @@ collision_layer = 2
 script = ExtResource( 1 )
 speed = 200
 gun_radius = 0
-gun_offset = Vector2( 25, 20 )
+gun_offset = Vector2( 25, 10 )
 color = Color( 1, 0, 0, 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
@@ -145,7 +145,7 @@ position = Vector2( 24.6, 10.6 )
 
 [node name="ActorSprite" type="Sprite" parent="."]
 material = SubResource( 7 )
-position = Vector2( 2.38419e-07, -0.4 )
+position = Vector2( 0, -5 )
 texture = SubResource( 13 )
 hframes = 6
 vframes = 5
@@ -165,7 +165,6 @@ anims/Shoot = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 9.53674e-08, 5.7 )
 shape = SubResource( 6 )
 
 [node name="StateTimer" type="Timer" parent="."]
