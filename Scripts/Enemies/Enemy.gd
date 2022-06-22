@@ -2,6 +2,7 @@ class_name Enemy
 extends Actor
 
 var is_in_state = false
+var is_in_colliding
 onready var player = get_node("/root/World/Player")
 
 func _ready():
@@ -55,12 +56,15 @@ func chase():
 	var navigation = get_node("/root/World/Navigation2D")
 	var player_pos = get_node("/root/World/Player").get_global_position()
 	# var point = navigation.get_simple_path(get_global_position(), dest)
-	var dest = navigation.get_simple_path(get_global_position(), player_pos)
+	self_to_target = player_pos - get_global_position()
+	var shape = $CollisionShape2D.shape
+	var start_pos = Util.get_raycast_point(get_global_position(), player_pos, shape)
+	get_node("/root/World/Player").update_chase_direction(get_global_position() - player_pos)
+	var dest = navigation.get_simple_path(start_pos, player_pos)
 	if dest.empty():
 		is_in_state = false
 		return
-	self_to_target = (dest[1] - dest[0]).normalized()
-	velocity = self_to_target * speed
+	velocity = (dest[1] - dest[0]).normalized() * speed
 	move_and_slide(velocity)
 	is_in_state = false
 

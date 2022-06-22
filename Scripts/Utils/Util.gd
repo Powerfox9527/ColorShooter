@@ -40,6 +40,30 @@ static func multiply_color(multiplier, color, m_alpha = false):
 func yield_time(time):
 	yield(get_tree().create_timer(time), "timeout")
 	return
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	
+static func get_raycast_point(start, end, shape):
+	var extents = shape.get_extents()
+	if extents.x == 0 or extents.y == 0:
+		return start
+	if end.x == start.x:
+		if end.y >= start.y:
+			return Vector2(start.x, start.y + extents.y)
+		else:
+			return Vector2(start.x, start.y - extents.y)
+	var slope = (end.y - start.y) / (end.x - start.x)
+	var extents_slope = extents.y / extents.x
+	if abs(slope) <= abs(extents_slope):
+		if start.x <= end.x:
+			return Vector2(extents.x, extents.x * slope) + start
+		else:
+			return Vector2(-1 * extents.x, -1 * extents.x * slope) + start
+	else:
+		if slope == 0:
+			if start.x <= end.x:
+				return Vector2(0, extents.y) + start
+			else:
+				return Vector2(0, -1 * extents.y) + start
+		elif start.y <= end.y:
+			return Vector2(extents.y / slope, extents.y) + start
+		else:
+			return Vector2(-1 * extents.y / slope, -1 * extents.y) + start

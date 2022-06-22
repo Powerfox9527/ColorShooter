@@ -14,3 +14,4 @@ func _ready():
 func _process(delta):
 	set_position(get_global_mouse_position())
 	set_rotation(get_rotation() + delta)
+	draw_circle(get_global_mouse_position(), 20, Color.red)

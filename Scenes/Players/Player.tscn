@@ -197,3 +197,7 @@ wait_time = 0.3
 
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 65535

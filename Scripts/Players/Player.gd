@@ -42,7 +42,11 @@ func update_gun(delta):
 	if Input.is_action_pressed("shoot"):
 		gun.create_bullet(self_to_target)
 	.update_gun(delta)
-	
+
+func update_chase_direction(dir):
+	$RayCast2D.set_cast_to(dir)
+	var point = $RayCast2D.get_collision_point()
+	return point
 
 func roll():
 	$RollTimer.stop()
