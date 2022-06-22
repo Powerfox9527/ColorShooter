@@ -3,12 +3,15 @@ extends Actor
 
 var is_in_state = false
 var is_in_colliding
+var dest_pos = Vector2.ZERO
 onready var player = get_node("/root/World/Player")
 
 func _ready():
 	generate_state()
 	$StateTimer.connect("timeout", self, "generate_state")
 
+func _draw():
+	draw_line(get_global_position(), dest_pos, Color.red, 1.0)
 
 func _physics_process(delta):
 	self_to_target = (player.get_global_position() - get_global_position()).normalized()
@@ -59,12 +62,12 @@ func chase():
 	self_to_target = player_pos - get_global_position()
 	var shape = $CollisionShape2D.shape
 	var start_pos = Util.get_raycast_point(get_global_position(), player_pos, shape)
-	get_node("/root/World/Player").update_chase_direction(get_global_position() - player_pos)
-	var dest = navigation.get_simple_path(start_pos, player_pos)
+	var dest = navigation.get_simple_path(get_global_position(), player_pos)
+	dest_pos = dest[2]
 	if dest.empty():
 		is_in_state = false
 		return
-	velocity = (dest[1] - dest[0]).normalized() * speed
+	velocity = (dest[2] - dest[0]).normalized() * speed
 	move_and_slide(velocity)
 	is_in_state = false
 

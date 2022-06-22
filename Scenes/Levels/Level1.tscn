@@ -16,22 +16,19 @@
 [ext_resource path="res://Sprites/UI/Frame.png" type="Texture" id=14]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( -1077, -1036, 1029, -1047, 1093, 1070, -1143, 1108 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( -1077, -1036, 1029, -1047, 1093, 1070, -1143, 1108 ) ]
+vertices = PoolVector2Array( 306, -242, -1078, -209, -1083, -1066, 1067, -1075, 1067, 1037, 302, 12, -1068, 1056, -1078, 33 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ) ]
+outlines = [ PoolVector2Array( -1068, 1056, 1067, 1037, 1067, -1075, -1083, -1066, -1078, -209, 306, -242, 302, 12, -1078, 33 ) ]
 
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-visible = false
 scale = Vector2( 8, 8 )
 tile_set = ExtResource( 11 )
 collision_layer = 0
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0 )
-
-[node name="Mouse" parent="." instance=ExtResource( 2 )]
 
 [node name="RGBBars" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
@@ -111,3 +108,5 @@ position = Vector2( 0, -500 )
 position = Vector2( 0, 300 )
 
 [node name="BulletGroup" type="Node2D" parent="."]
+
+[node name="Mouse" parent="." instance=ExtResource( 2 )]
