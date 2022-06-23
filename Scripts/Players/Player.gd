@@ -11,9 +11,11 @@ func _physics_process(delta):
 	update_gun(delta)
 
 ### move
-func move(delta):
-	if Input.is_action_just_pressed("roll"):
+func _unhandled_input(event):
+	if event.is_action_pressed("roll"):
 		roll()
+
+func move(delta):
 	velocity = Vector2.ZERO
 	if Input.get_action_strength("ui_left"):
 		velocity.x += -Input.get_action_strength("ui_left")
@@ -28,7 +30,7 @@ func move(delta):
 		move_and_slide(velocity)
 		self_to_target = (get_global_mouse_position() - get_position()).normalized()
 		.set_move_anim()
-	
+
 	if !$RollTimer.is_stopped():
 		move_and_slide(self_to_target * roll_distance)
 	

@@ -4,14 +4,18 @@ extends Actor
 var is_in_state = false
 var is_in_colliding
 var dest_pos = Vector2.ZERO
+var start_pos = Vector2.ZERO
 onready var player = get_node("/root/World/Player")
 
 func _ready():
 	generate_state()
 	$StateTimer.connect("timeout", self, "generate_state")
-
 func _draw():
-	draw_line(get_global_position(), dest_pos, Color.red, 1.0)
+	var player_pos = get_node("/root/World/Player").get_global_position()
+	var shape = $CollisionShape2D.shape
+	var point = Util.get_raycast_point(get_global_position(), player_pos, shape.get_extents() * 5)
+	# draw_circle(point, 5, Color.black)
+
 
 func _physics_process(delta):
 	self_to_target = (player.get_global_position() - get_global_position()).normalized()
@@ -58,17 +62,30 @@ func generate_state():
 func chase():
 	var navigation = get_node("/root/World/Navigation2D")
 	var player_pos = get_node("/root/World/Player").get_global_position()
-	# var point = navigation.get_simple_path(get_global_position(), dest)
 	self_to_target = player_pos - get_global_position()
 	var shape = $CollisionShape2D.shape
-	var start_pos = Util.get_raycast_point(get_global_position(), player_pos, shape)
-	var dest = navigation.get_simple_path(get_global_position(), player_pos)
-	dest_pos = dest[2]
-	if dest.empty():
+	start_pos = Util.get_raycast_point(get_global_position(), player_pos, shape.get_extents() * 5)
+	var path = navigation.get_simple_path(start_pos, player_pos)
+	if path.empty():
 		is_in_state = false
 		return
-	velocity = (dest[2] - dest[0]).normalized() * speed
-	move_and_slide(velocity)
+	for i in range(path.size()):
+		velocity = path[0] - start_pos
+		var distance = velocity.length()
+		if distance > speed:
+			move_and_slide(velocity)
+			dest_pos = path[0]
+			print("move")
+			break
+		elif distance <= speed and distance > 0:
+			dest_pos = start_pos.linear_interpolate(path[0], distance / speed)
+			move_and_slide(dest_pos - start_pos)
+			print("interpolate")
+		else:
+			dest_pos = path[0]
+			start_pos = path[0]
+			path.remove(0)
+			print("stay")
 	is_in_state = false
 
 func color_change():
