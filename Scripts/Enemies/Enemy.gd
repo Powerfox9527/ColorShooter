@@ -64,13 +64,18 @@ func chase():
 	var player_pos = get_node("/root/World/Player").get_global_position()
 	self_to_target = player_pos - get_global_position()
 	var shape = $CollisionShape2D.shape
-	start_pos = Util.get_raycast_point(get_global_position(), player_pos, shape.get_extents() * 5)
+	start_pos = get_global_position()
 	var path = navigation.get_simple_path(start_pos, player_pos)
 	if path.empty():
 		is_in_state = false
 		return
 	for i in range(path.size()):
 		velocity = path[0] - start_pos
+		# test two dimension collision and interpolate them
+		$RayCast2D.set_cast_to(Vector2(velocity.x, 0))
+		velocity.x = $RayCast2D.get_collision_point().x - start_pos.x
+		$RayCast2D.set_cast_to(Vector2(0, velocity.y))
+		velocity.y = $RayCast2D.get_collision_point().y - start_pos.y
 		var distance = velocity.length()
 		if distance > speed:
 			move_and_slide(velocity)

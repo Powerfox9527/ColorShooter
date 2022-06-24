@@ -170,5 +170,7 @@ shape = SubResource( 6 )
 [node name="StateTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="Line2D" type="Line2D" parent="."]
-width = 3.0
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 253
+collide_with_areas = true
