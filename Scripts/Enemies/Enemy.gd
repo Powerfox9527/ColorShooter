@@ -5,16 +5,15 @@ var is_in_state = false
 var is_in_colliding
 var dest_pos = Vector2.ZERO
 var start_pos = Vector2.ZERO
+var dirs = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, 1), Vector2(1, -1)]
 onready var player = get_node("/root/World/Player")
-
+var points = []
 func _ready():
 	generate_state()
 	$StateTimer.connect("timeout", self, "generate_state")
 func _draw():
-	var player_pos = get_node("/root/World/Player").get_global_position()
-	var shape = $CollisionShape2D.shape
-	var point = Util.get_raycast_point(get_global_position(), player_pos, shape.get_extents() * 5)
-	# draw_circle(point, 5, Color.black)
+	for point in points:
+		draw_circle(point, 5, Color.black)
 
 
 func _physics_process(delta):
@@ -65,33 +64,30 @@ func chase(delta):
 	self_to_target = player_pos - get_global_position()
 	var shape = $CollisionShape2D.shape
 	start_pos = get_global_position()
-	var path = navigation.get_simple_path(start_pos, player_pos)
+	var path = navigation.get_nav_path(start_pos, player_pos)
+	$Line2D.points = path
+	for point in $Line2D.points:
+		point -= get_global_position()
+	$Line2D.add_point(Vector2.ZERO)
 	if path.empty():
 		is_in_state = false
 		return
 	for i in range(path.size()):
-		velocity = path[0] - start_pos
-		# $Line2D2.points = [velocity.normalized() * speed, Vector2.ZERO]
-		# test two dimension collision and interpolate them
-		if velocity.x > 0:
-			$RayCast2D.set_cast_to(Vector2(shape.extents.x * scale.x + velocity.x * speed * delta, 0))
-		elif velocity.x < 0:
-			$RayCast2D.set_cast_to(Vector2(-shape.extents.x * scale.x - velocity.x * speed * delta, 0))
-		$RayCast2D.force_raycast_update()
-		if $RayCast2D.is_colliding() and velocity.x != 0:
-			velocity.x = 0
-			
-		if velocity.y > 0:
-			$RayCast2D.set_cast_to(Vector2(0, shape.extents.y * scale.y + velocity.y * speed * delta))
-		elif velocity.y > 0:
-			$RayCast2D.set_cast_to(Vector2(0, -shape.extents.y * scale.y - velocity.y * speed * delta))
-		$RayCast2D.force_raycast_update()
-		if $RayCast2D.is_colliding() and velocity.y != 0:
-			velocity.y = 0
-		$Line2D.points = [velocity.normalized() * speed, Vector2.ZERO]
+		velocity = path[i] - start_pos
+		if velocity.length() <= 0:
+			continue
 		move_and_slide(velocity.normalized() * speed)
-		path.remove(0)
 	is_in_state = false
+
+func test_pos_move(pos):
+	var test_transform = get_global_transform()
+	test_transform.translated(pos - test_transform.get_origin())
+	points.append(pos)
+	var can_move = true
+	for dir in dirs:
+		if test_move(test_transform, dir):
+			can_move = false
+	return can_move
 
 func color_change():
 	var new_color = Color.black

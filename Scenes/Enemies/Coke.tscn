@@ -173,7 +173,7 @@ autostart = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 show_behind_parent = true
 enabled = true
-collision_mask = 255
+collision_mask = 252
 collide_with_areas = true
 collide_with_bodies = false
 
