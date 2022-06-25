@@ -22,7 +22,7 @@ func _physics_process(delta):
 	if wait_anim.length() <= 0:
 		set_move_anim()
 	angle = Vector2.UP.angle_to(self_to_target)
-	if angle < 0:
+	if angle <= 0:
 		sprite.set_flip_h(true)
 	else:
 		sprite.set_flip_h(false)
@@ -31,7 +31,7 @@ func _physics_process(delta):
 		return
 	is_in_state = true
 	if state == "chase":
-		chase()
+		chase(delta)
 	elif state == "color_change":
 		color_change()
 	elif state == "simple_shoot":
@@ -59,7 +59,7 @@ func generate_state():
 	state = "chase"
 	print(state)
 		
-func chase():
+func chase(delta):
 	var navigation = get_node("/root/World/Navigation2D")
 	var player_pos = get_node("/root/World/Player").get_global_position()
 	self_to_target = player_pos - get_global_position()
@@ -71,26 +71,26 @@ func chase():
 		return
 	for i in range(path.size()):
 		velocity = path[0] - start_pos
+		# $Line2D2.points = [velocity.normalized() * speed, Vector2.ZERO]
 		# test two dimension collision and interpolate them
-		$RayCast2D.set_cast_to(Vector2(velocity.x, 0))
-		velocity.x = $RayCast2D.get_collision_point().x - start_pos.x
-		$RayCast2D.set_cast_to(Vector2(0, velocity.y))
-		velocity.y = $RayCast2D.get_collision_point().y - start_pos.y
-		var distance = velocity.length()
-		if distance > speed:
-			move_and_slide(velocity)
-			dest_pos = path[0]
-			print("move")
-			break
-		elif distance <= speed and distance > 0:
-			dest_pos = start_pos.linear_interpolate(path[0], distance / speed)
-			move_and_slide(dest_pos - start_pos)
-			print("interpolate")
-		else:
-			dest_pos = path[0]
-			start_pos = path[0]
-			path.remove(0)
-			print("stay")
+		if velocity.x > 0:
+			$RayCast2D.set_cast_to(Vector2(shape.extents.x * scale.x + velocity.x * speed * delta, 0))
+		elif velocity.x < 0:
+			$RayCast2D.set_cast_to(Vector2(-shape.extents.x * scale.x - velocity.x * speed * delta, 0))
+		$RayCast2D.force_raycast_update()
+		if $RayCast2D.is_colliding() and velocity.x != 0:
+			velocity.x = 0
+			
+		if velocity.y > 0:
+			$RayCast2D.set_cast_to(Vector2(0, shape.extents.y * scale.y + velocity.y * speed * delta))
+		elif velocity.y > 0:
+			$RayCast2D.set_cast_to(Vector2(0, -shape.extents.y * scale.y - velocity.y * speed * delta))
+		$RayCast2D.force_raycast_update()
+		if $RayCast2D.is_colliding() and velocity.y != 0:
+			velocity.y = 0
+		$Line2D.points = [velocity.normalized() * speed, Vector2.ZERO]
+		move_and_slide(velocity.normalized() * speed)
+		path.remove(0)
 	is_in_state = false
 
 func color_change():

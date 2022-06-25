@@ -171,6 +171,15 @@ shape = SubResource( 6 )
 autostart = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+show_behind_parent = true
 enabled = true
-collision_mask = 253
+collision_mask = 255
 collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 3.0
+
+[node name="Line2D2" type="Line2D" parent="."]
+width = 3.0
+default_color = Color( 1, 0.0196078, 0.0196078, 1 )
