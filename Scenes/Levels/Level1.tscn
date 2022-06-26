@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Players/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Players/Mouse.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sprites/UI/BlurFrame.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Utils/RGBBars.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Levels/ToyTileSet.tres" type="TileSet" id=11]
+[ext_resource path="res://Sprites/UI/Light.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/UI/Bar.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/UI/Frame.png" type="Texture" id=14]
 [ext_resource path="res://Scripts/Utils/Manager.gd" type="Script" id=15]
@@ -79,3 +80,8 @@ position = Vector2( 0, -400 )
 [node name="BulletGroup" type="Node2D" parent="."]
 
 [node name="Mouse" parent="." instance=ExtResource( 2 )]
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 12 )
+texture_scale = 20.0
+energy = 0.78
