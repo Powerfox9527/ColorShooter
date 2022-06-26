@@ -58,7 +58,7 @@ func set_move_anim():
 	else:
 		anim += "Idle"
 	if animator.get_animation(anim) != null and animator.get_current_animation() != anim:
-		animator.play(anim)
+		animator.play(anim, sprite.is_flipped_h())
 
 func set_anim(anim, wait = false):
 	if wait_anim.length() > 0:
