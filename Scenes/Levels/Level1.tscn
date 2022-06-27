@@ -11,10 +11,10 @@
 [ext_resource path="res://Sprites/UI/BlurFrame.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Utils/RGBBars.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Levels/ToyTileSet.tres" type="TileSet" id=11]
-[ext_resource path="res://Sprites/UI/Light.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/UI/Bar.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/UI/Frame.png" type="Texture" id=14]
 [ext_resource path="res://Scripts/Utils/Manager.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Enemies/Coke.tscn" type="PackedScene" id=16]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 15 )
@@ -81,7 +81,5 @@ position = Vector2( 0, -400 )
 
 [node name="Mouse" parent="." instance=ExtResource( 2 )]
 
-[node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 12 )
-texture_scale = 20.0
-energy = 0.78
+[node name="Coke" parent="." instance=ExtResource( 16 )]
+position = Vector2( 0, 200 )

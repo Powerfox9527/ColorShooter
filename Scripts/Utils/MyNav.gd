@@ -108,4 +108,6 @@ func get_nav_path(start_pos, end_pos, tile_layer = 0):
 		
 	get_node("/root/World").set_debug_points_red(res)
 	return res
-	
+
+func get_cell_size(tile_layer = 0):
+	return cell_size[tile_layer]

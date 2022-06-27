@@ -2,6 +2,8 @@ class_name Player
 extends Actor
 
 export var roll_distance = 400
+export var hit_frame_count = 0
+export var hit_frame_max = 8
 
 func _ready():
 	$HurtTimer.connect("timeout", self, "_on_hurt_timeout")
@@ -9,6 +11,7 @@ func _ready():
 func _physics_process(delta):
 	move(delta)
 	update_gun(delta)
+	update_hurt_visible()
 
 ### move
 func _unhandled_input(event):
@@ -45,6 +48,18 @@ func update_gun(delta):
 		gun.create_bullet(self_to_target)
 	.update_gun(delta)
 
+func update_hurt_visible():
+	if $HurtTimer.is_stopped():
+		set_visible(true)
+		return
+	hit_frame_count += 1
+	if hit_frame_count > hit_frame_max:
+		hit_frame_count = 0
+	if hit_frame_count < hit_frame_max * 0.5:
+		set_visible(false)
+	else:
+		set_visible(true)
+
 func update_chase_direction(dir):
 	$RayCast2D.set_cast_to(dir)
 	var point = $RayCast2D.get_collision_point()
@@ -79,10 +94,8 @@ func get_hurt(hurt_color):
 		# print("It's in hurting")
 		return
 	if hurt_color.gray() <= 0:
-		print("No Hurt Amount")
 		return
 	if wait_anim.length() > 0:
-		print("It's in wait_anim")
 		return
 	if angle < PI / 2 and angle > -1 * PI/2:
 		set_anim("BackHurt", true)

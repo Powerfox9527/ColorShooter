@@ -6,15 +6,18 @@ var is_in_colliding
 var dest_pos = Vector2.ZERO
 var start_pos = Vector2.ZERO
 var dirs = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, 1), Vector2(1, -1)]
+var nav_offset = 0
 onready var player = get_node("/root/World/Player")
-export var nav_offset = 1.2
 var points = []
+
 func _ready():
 	generate_state()
 	$StateTimer.connect("timeout", self, "generate_state")
-func _draw():
-	for point in points:
-		draw_circle(point, 5, Color.black)
+	var navigation = get_node("/root/World/Navigation2D")
+	var shape = $CollisionShape2D.get_shape()
+	var shape_diag = pow(shape.extents.x * scale.x, 2) * pow(shape.extents.y * scale.y, 2)
+	var nav_cell_diag = pow(navigation.get_cell_size().x, 2) * pow(navigation.get_cell_size().y, 2)
+	nav_offset = shape_diag / nav_cell_diag
 
 
 func _physics_process(delta):
@@ -67,14 +70,14 @@ func chase():
 		is_in_state = false
 		return
 	for i in range(path.size()):
-		velocity = path[i] * nav_offset - get_global_position()
+		velocity = path[i] - get_global_position()
+		# only reserve one direction
+		velocity += path[i].normalized() * nav_offset
+#		velocity += shape.extents * 0.5 * scale * velocity.normalized()
 		var distance = velocity.length()
 		if distance <= 0:
 			continue
-		elif distance >= speed * get_process_delta_time():
-			move_and_slide(velocity.normalized() * speed)
-		elif distance < speed * get_process_delta_time():
-			move_and_slide(velocity.normalized() * distance)
+		move_and_slide(velocity.normalized() * speed)
 	is_in_state = false
 
 func test_pos_move(pos):
