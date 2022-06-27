@@ -46,7 +46,7 @@ _global_script_class_icons={
 
 config/name="ColorShooter"
 config/description="A STG Game with Color Shooter"
-run/main_scene="res://Scenes/Levels/Level1.tscn"
+run/main_scene="res://Scenes/Levels/SceneGeneration.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

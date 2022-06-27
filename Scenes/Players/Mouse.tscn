@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Utils/Mouse.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/UI/Mouse.gd" type="Script" id=1]
 
 [sub_resource type="StreamTexture" id=3]
 load_path = "res://.import/Mouse.png-ea3c02ff93855a3f4d7641817542b46d.stex"
