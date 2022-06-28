@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background.png-a7a5badcfdffa64b93e9b69276017cd9.stex"
+path="res://.import/Green_Block.png-833e372fc189157c37027cba34c26da5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Background.png"
-dest_files=[ "res://.import/Background.png-a7a5badcfdffa64b93e9b69276017cd9.stex" ]
+source_file="res://Sprites/Levels/Items/Green_Block.png"
+dest_files=[ "res://.import/Green_Block.png-833e372fc189157c37027cba34c26da5.stex" ]
 
 [params]
 

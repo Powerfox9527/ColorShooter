@@ -2,12 +2,12 @@
 
 importer="aseprite.wizard.plugin"
 type="SpriteFrames"
-path="res://.import/Light.aseprite-7162eeaaf5c15d61c3ce368169fa883d.res"
+path="res://.import/Building_Block.aseprite-478140ac545b1089de1cfe5cbacd36bf.res"
 
 [deps]
 
-source_file="res://Sprites/UI/Light.aseprite"
-dest_files=[ "res://.import/Light.aseprite-7162eeaaf5c15d61c3ce368169fa883d.res" ]
+source_file="res://Sprites/Levels/Items/Building_Block.aseprite"
+dest_files=[ "res://.import/Building_Block.aseprite-478140ac545b1089de1cfe5cbacd36bf.res" ]
 
 [params]
 

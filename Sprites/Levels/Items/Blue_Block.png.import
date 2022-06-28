@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blue_Block.png-9845efa84b643f41ffeaa944cfcb40ca.stex"
+path="res://.import/Blue_Block.png-0e42a58f5c2adda9c60229b02db31c38.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Items/Blue_Block.png"
-dest_files=[ "res://.import/Blue_Block.png-9845efa84b643f41ffeaa944cfcb40ca.stex" ]
+source_file="res://Sprites/Levels/Items/Blue_Block.png"
+dest_files=[ "res://.import/Blue_Block.png-0e42a58f5c2adda9c60229b02db31c38.stex" ]
 
 [params]
 

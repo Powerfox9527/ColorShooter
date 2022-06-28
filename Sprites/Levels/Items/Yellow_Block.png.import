@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Green_Block.png-4da1fd98d141e49726aebd40103c8a5d.stex"
+path="res://.import/Yellow_Block.png-b707443a7fa828fa3c3b9cab724e4594.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Items/Green_Block.png"
-dest_files=[ "res://.import/Green_Block.png-4da1fd98d141e49726aebd40103c8a5d.stex" ]
+source_file="res://Sprites/Levels/Items/Yellow_Block.png"
+dest_files=[ "res://.import/Yellow_Block.png-b707443a7fa828fa3c3b9cab724e4594.stex" ]
 
 [params]
 

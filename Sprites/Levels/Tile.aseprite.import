@@ -2,12 +2,12 @@
 
 importer="aseprite.wizard.plugin"
 type="SpriteFrames"
-path="res://.import/Background.aseprite-37027299995884e25a47d382817ad0af.res"
+path="res://.import/Tile.aseprite-921699e0556ffb3a4c22070aa5b0143c.res"
 
 [deps]
 
-source_file="res://Sprites/UI/Background.aseprite"
-dest_files=[ "res://.import/Background.aseprite-37027299995884e25a47d382817ad0af.res" ]
+source_file="res://Sprites/Levels/Tile.aseprite"
+dest_files=[ "res://.import/Tile.aseprite-921699e0556ffb3a4c22070aa5b0143c.res" ]
 
 [params]
 

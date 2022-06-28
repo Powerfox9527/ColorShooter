@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red_Block.png-38ada432cc0f22851a8690ebc56e7741.stex"
+path="res://.import/Tile.png-1ee97d6d6044c7850f83297a6537ff64.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Items/Red_Block.png"
-dest_files=[ "res://.import/Red_Block.png-38ada432cc0f22851a8690ebc56e7741.stex" ]
+source_file="res://Sprites/Levels/Tile.png"
+dest_files=[ "res://.import/Tile.png-1ee97d6d6044c7850f83297a6537ff64.stex" ]
 
 [params]
 

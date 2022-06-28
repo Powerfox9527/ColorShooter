@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/White_Block.png-851f272f0d64191ebc279ca9134b2b58.stex"
+path="res://.import/Building_Blocks.png-1f5e2264a9b08d9a7bffda1ca38d309e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Items/White_Block.png"
-dest_files=[ "res://.import/White_Block.png-851f272f0d64191ebc279ca9134b2b58.stex" ]
+source_file="res://Sprites/Levels/Items/Building_Blocks.png"
+dest_files=[ "res://.import/Building_Blocks.png-1f5e2264a9b08d9a7bffda1ca38d309e.stex" ]
 
 [params]
 
