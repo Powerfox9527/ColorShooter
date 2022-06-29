@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/Levels/Rainbow.png" type="Texture" id=1]
+
+[node name="Rainbow" type="Sprite"]
+texture = ExtResource( 1 )
