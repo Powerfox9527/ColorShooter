@@ -10,37 +10,51 @@ extends Node2D
 #8. Move the polygon to the original min and max coordinates.
 var cell_size = Vector2(64, 64)
 # accord to the tile set 
-var dirs = [Vector2(0, -1), Vector2(1, 0), Vector2(1, 0), Vector2(0, 1), 
-Vector2(0, 1), Vector2(-1, 0), Vector2(-1, 0), Vector2(0, -1)]
-var cell_half_num = 20
+var dirs = [Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1), Vector2(-1, -1), 
+Vector2(0, 1), Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1)]
+var cell_num = 60
 var ran_generator = RandomNumberGenerator.new()
 export var seed_id = 0
+export var use_seed = false
 onready var tilemap = $TileMap
+var islands = []
 func _ready():
 	cell_size = tilemap.get_cell_size() * tilemap.scale
-	ran_generator.set_seed(seed_id)
-	var points = [Vector2.ZERO]
-	var used_dirs = [ran_generator.randi_range(0, 7)]
-	for i in range(cell_half_num):
-		var ran = get_ran_follower(used_dirs[i])
-		used_dirs.append(ran)
-	for dir in used_dirs:
-		points.append(points.back() + dirs[dir])
-		tilemap.set_cell(points.back().x, points.back().y, dir)
-	print(points)
-	print(used_dirs)
-	get_node("/root/World").set_debug_points([Vector2.ZERO])
+	if use_seed:
+		ran_generator.set_seed(seed_id)
+	# generate a big island in the center and spread out
+	generate_island(Vector2.ZERO, 2)
+
+func generate_island(island_center, scale = 1):
+	var points = [island_center] 
+	while points.size() < cell_num * scale:
+		var ran = ran_generator.randi_range(0, points.size() - 1)
+		for dir in dirs:
+			if points.count(points[ran] + dir) <= 0:
+				points.append(points[ran] + dir)
+	for point in points:
+		tilemap.set_cell(point.x, point.y, get_cell_dir(point, points))
+	islands.append(points)
 
 func get_pos_by_cell(cell, tile_layer = 0):
 	return cell_size * scale * cell
-
-func get_ran_follower(tile):
-	var ran = 0
-	# if tile is even, then the follower could only be itself+1 or itself + 2
-	if tile % 2 == 0:
-		ran = ran_generator.randi_range(tile + 1, tile + 2)
-	# if tile is odd, then the follower could only be itself or itself+1
+	
+func get_cell_dir(point, points):
+	var test_dirs = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1)]
+	var test_count = []
+	for i in range(test_dirs.size()):
+		var dir = test_dirs[i]
+		if points.count(point + dir) <= 0:
+			test_count.append(i)
+	if test_count.size() <= 0:
+		return 8
+	elif test_count.size() == 1:
+		# 1230 1357
+		var edge1 = [7, 1, 3, 5]
+		return edge1[test_count[0]]
 	else:
-		ran = ran_generator.randi_range(tile, tile + 1)
-	# avoid 7
-	return ran % 8
+		# 0123 0246
+		if test_count[0] == 0 and test_count[1] == 3:
+			return 6
+		return test_count[0] * 2
+
