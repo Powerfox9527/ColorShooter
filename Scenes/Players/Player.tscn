@@ -191,7 +191,6 @@ shape = SubResource( 18 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 5, 5 )
 
 [node name="HurtTimer" type="Timer" parent="."]
 wait_time = 0.3

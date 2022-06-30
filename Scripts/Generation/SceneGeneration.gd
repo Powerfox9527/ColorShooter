@@ -12,11 +12,11 @@ var cell_size = Vector2(64, 64)
 # accord to the tile set 
 var dirs = [Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1), Vector2(-1, -1), 
 Vector2(0, 1), Vector2(1, 0), Vector2(-1, 0), Vector2(0, -1)]
-var cell_num = 60
+export var cell_num = 60
 var ran_generator = RandomNumberGenerator.new()
 export var seed_id = 0
 export var use_seed = false
-export var island_count = 6
+export var island_count = 2
 onready var tilemap = $TileMap
 var island_cells = []
 var rainbow_path = "res://Scenes/Levels/Rainbow.tscn"
@@ -31,7 +31,6 @@ func _ready():
 		var ran = ran_generator.randi_range(0, 7)
 		var island_dir = (Vector2.ZERO + dirs[ran]) * ran_generator.randf_range(cell_num / 4, cell_num)
 		generate_island(island_dir)
-	connect_islands()
 
 func generate_island(island_center, scale = 1):
 	var points = [island_center] 
@@ -41,7 +40,8 @@ func generate_island(island_center, scale = 1):
 			if points.count(points[ran] + dir) <= 0:
 				points.append(points[ran] + dir)
 	for point in points:
-		tilemap.set_cell(point.x, point.y, get_cell_dir(point, points))
+		var dir = get_cell_dir(point, points)
+		tilemap.set_cell(point.x, point.y, dir)
 	island_cells.append(points)
 
 func connect_islands():
@@ -56,7 +56,7 @@ func connect_islands():
 			rainbow.set_global_position(get_pos_by_cell(middle_point))
 			var angle = point_to_other.angle() + PI/2
 			rainbow.set_rotation(angle)
-			rainbow.set_scale(Vector2(1, point_to_other.length() * scale.y))
+			rainbow.set_scale(Vector2(2, point_to_other.length()))
 
 func get_pos_by_cell(cell):
 	return cell_size * scale * cell
