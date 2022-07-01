@@ -9,7 +9,7 @@ var debug_points_red = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_as_toplevel(true)
-
+	
 func _draw():
 	for point in debug_points:
 		draw_circle(point, 10, Color.black)
