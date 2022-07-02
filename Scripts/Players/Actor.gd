@@ -24,7 +24,7 @@ func _ready():
 	gun_radius *= get_scale().x
 	gun_offset *= get_scale().x
 	gun.power = attack
-	add_user_signal("Death")
+	add_user_signal("Death", [self])
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)
@@ -63,7 +63,7 @@ func set_move_anim():
 		animator.play(anim)
 
 func set_anim(anim, wait = false):
-	if wait_anim.length() > 0:
+	if wait_anim.length() > 0 or not animator.has_animation(anim):
 		return
 	var animation = animator.get_animation(anim)
 	if anim.length() > 0 and animation != null:	

@@ -147,7 +147,7 @@ func dead():
 	set_anim("Jump", true)
 	shoot(bullet_velocities)
 	generate_state()
-	emit_signal("Death")
+	emit_signal("Death", self)
 
 ### anim
 func _on_anim_finished(anim_name):

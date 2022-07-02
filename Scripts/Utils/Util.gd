@@ -62,3 +62,9 @@ static func get_raycast_point(start, end, extents):
 			return Vector2(extents.y / slope, extents.y) + start
 		else:
 			return Vector2(-1 * extents.y / slope, -1 * extents.y) + start
+
+static func pick_rand_item(array, ran_generator = null):
+	var ran = int(rand_range(0, array.size() - 1))
+	if ran_generator:
+		ran = ran_generator.randi_range(0, array.size() - 1)
+	return array[ran]

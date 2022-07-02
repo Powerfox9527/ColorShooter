@@ -17,7 +17,7 @@ var ran_generator = RandomNumberGenerator.new()
 export var seed_id = 0
 export var use_seed = false
 export var island_count = 0
-export var enemy_count = 4
+export var enemy_count = 1
 onready var tilemap = $TileMap
 onready var tilemap2 = $TileMap2
 onready var tilemap3 = $TileMap3
@@ -137,8 +137,36 @@ func spawn_light(pos = Vector2.ZERO, flip = false):
 	get_node("/root/World").add_child(light)
 	return light
 
-func generate_gate():
+func spawn_bonus(pos = Vector2.ZERO):
+	var bonus = load("res://Scenes/Levels/Light.tscn").instance()
+	bonus.set_global_position(pos)
+	get_node("/root/World").add_child(bonus)
+	return bonus
+
+func generate_gate(enemy):
 	enemy_count -= 1
 	if enemy_count <= 0:
+		# generate bonus
+		spawn_bonus(enemy.get_global_position())
 		var rainbow = load(rainbow_path).instance()
 		get_node("RainbowGroup").add_child(rainbow)
+		var first_cells = island_cells[0]
+		# choose two or three direction to be gate
+		var gate_count = ran_generator.randi_range(2, 3)
+		var ok_cells = []
+		for i in range(4):
+			ok_cells.append([])
+		for point in first_cells:
+			var dir = get_cell_dir(point, first_cells)
+			if dir in [0, 2, 4, 6]:
+				ok_cells[dir / 2].append(point)
+		ok_cells.shuffle()
+		for ok_dir in ok_cells:
+			if gate_count <= 0:
+				break
+			var ok_cell = Util.pick_rand_item(ok_dir, ran_generator)
+			var gate_pos = tilemap.map_to_world(ok_cell) * scale
+			gate_pos += cell_size * 0.5
+			rainbow.set_global_position(gate_pos)
+			rainbow.set_scale(Vector2(2, 100))
+			gate_count -= 1
