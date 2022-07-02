@@ -37,10 +37,6 @@ static func multiply_color(multiplier, color, m_alpha = false):
 		color.a *= multiplier
 	return color
 
-func yield_time(time):
-	yield(get_tree().create_timer(time), "timeout")
-	return
-	
 static func get_raycast_point(start, end, extents):
 	if extents.x == 0 or extents.y == 0:
 		return start

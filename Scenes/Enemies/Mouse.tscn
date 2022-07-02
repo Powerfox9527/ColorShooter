@@ -1,32 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scripts/Enemies/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Mouse.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Shaders/SetColorOnlyGray.gdshader" type="Shader" id=2]
 [ext_resource path="res://Scenes/Guns/CokeGun.tscn" type="PackedScene" id=3]
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="StreamTexture" id=17]
+load_path = "res://.import/Gun.png-62df804b88a5d22b2c92c6df7b75be42.stex"
+
+[sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StreamTexture" id=16]
-load_path = "res://.import/Body.png-b14e6744cb00b4b1638a4a85f100f2b4.stex"
-
-[sub_resource type="Animation" id=14]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("ActorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 17.0, 19.0 ]
-}
+[sub_resource type="StreamTexture" id=19]
+load_path = "res://.import/Layer 2.png-19235afc7d1d79677ba5199b312b41e2.stex"
 
 [sub_resource type="Animation" id=2]
 length = 0.4
@@ -41,7 +28,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19.0, 20.0, 20.0, 21.0 ]
+"values": [ 12.0, 13.0, 14.0, 15.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -57,14 +44,58 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0 ]
+"values": [ 12.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0 ]
 }
 
 [sub_resource type="Animation" id=15]
-length = 0.2
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("ActorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 10.0, 11.0, 10.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Gun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ActorSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, 1.0, 2.0, 3.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Gun:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -73,44 +104,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 17.0, 18.0 ]
+"values": [ 1.0, 2.0 ]
 }
-
-[sub_resource type="Animation" id=4]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("ActorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0.0, 1.0, 2.0, 3.0 ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 0.7
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("ActorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.2
-loop = true
 
 [sub_resource type="Animation" id=5]
 length = 0.7
@@ -129,42 +124,45 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 13.6, 21.5 )
+extents = Vector2( 8.9, 14.4 )
 
-[node name="Coke" type="KinematicBody2D"]
-scale = Vector2( 5, 5 )
+[node name="Mouse" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
 collision_layer = 2
 script = ExtResource( 1 )
-speed = 200
-gun_radius = 0
-gun_offset = Vector2( 25, 10 )
-color = Color( 1, 0, 0, 1 )
+speed = 100
+gun_radius = 5
+gun_offset = Vector2( 3, 2 )
+attack = 3.0
+color = Color( 0.607843, 0.607843, 0.607843, 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 24.6, 10.6 )
+position = Vector2( 10, 2 )
+texture = SubResource( 17 )
+frame = 2
 
 [node name="ActorSprite" type="Sprite" parent="."]
-material = SubResource( 7 )
+material = SubResource( 18 )
 position = Vector2( 0, -5 )
-texture = SubResource( 16 )
-hframes = 6
+texture = SubResource( 19 )
+hframes = 5
 vframes = 5
-frame = 17
+frame = 15
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvRW5lbWllcy9Db2tlLmFzZXByaXRlCmxheWVyfD1Cb2R5Cm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL1Nwcml0ZXMvRW5lbWllcy9Nb3VzZS5hc2Vwcml0ZQpsYXllcnw9TGF5ZXIgMgpvcF9leHB8PVRydWUKb19mb2xkZXJ8PQpvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BackHurt = SubResource( 14 )
 anims/BackIdle = SubResource( 2 )
 anims/BackWalk = SubResource( 3 )
 anims/Hurt = SubResource( 15 )
 anims/Idle = SubResource( 4 )
-anims/Jump = SubResource( 9 )
 anims/Shoot = SubResource( 11 )
 anims/Walk = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, -5.2 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
 
 [node name="StateTimer" type="Timer" parent="."]
@@ -179,7 +177,3 @@ collide_with_bodies = false
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 3.0
-
-[node name="Line2D2" type="Line2D" parent="."]
-width = 3.0
-default_color = Color( 1, 0.0196078, 0.0196078, 1 )

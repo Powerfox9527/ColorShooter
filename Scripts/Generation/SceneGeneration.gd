@@ -16,7 +16,8 @@ export var cell_num = 60
 var ran_generator = RandomNumberGenerator.new()
 export var seed_id = 0
 export var use_seed = false
-export var island_count = 2
+export var island_count = 0
+export var enemy_count = 4
 onready var tilemap = $TileMap
 onready var tilemap2 = $TileMap2
 onready var tilemap3 = $TileMap3
@@ -63,7 +64,9 @@ func connect_islands():
 			rainbow.set_rotation(angle)
 			rainbow.set_scale(Vector2(2, point_to_other.length()))
 
-func get_pos_by_cell(cell):
+func get_pos_by_cell(cell, middle = false):
+	if middle:
+		return cell_size * scale * cell + cell_size * 0.5 * scale
 	return cell_size * scale * cell
 	
 func get_cell_dir(point, points):
@@ -92,8 +95,50 @@ func generate_obstruct():
 		var dir = get_cell_dir(point, first_cells)
 		if dir == 8 and point != Vector2.ZERO:
 			var spawn = ran_generator.randf()
-			if spawn < 0:
+			if spawn < 0.2:
 				dir = ran_generator.randi_range(9, 14)
 				tilemap2.set_cell(point.x, point.y, dir)
 				second_cells.append(point)
+		if dir in [0, 2, 4, 6]:
+			var light_pos = tilemap.map_to_world(point) * scale
+			light_pos += cell_size * 0.5
+			spawn_light(light_pos, dir == 0 or dir == 6)
 	island_cells.append(second_cells)
+
+func generate_enemies():
+	var first_cells = island_cells[0]
+	var temp_enemies_count = enemy_count
+	for point in first_cells:
+		var dir = get_cell_dir(point, first_cells)
+		if dir == 8 and point != Vector2.ZERO and not point in island_cells[1]:
+			if temp_enemies_count > 0:
+				var enemy_pos = tilemap.map_to_world(point) * scale
+				enemy_pos += cell_size * 0.5
+				var mouse = spawn_mouse(enemy_pos)
+				temp_enemies_count -= 1
+				mouse.connect("Death", self, "generate_gate")
+	
+func spawn_coke(pos = Vector2.ZERO):
+	var coke = load("res://Scenes/Enemies/Coke.tscn").instance()
+	coke.set_global_position(pos)
+	get_node("/root/World").add_child(coke)
+	return coke
+
+func spawn_mouse(pos = Vector2.ZERO):
+	var mice = load("res://Scenes/Enemies/Mouse.tscn").instance()
+	mice.set_global_position(pos)
+	get_node("/root/World").add_child(mice)
+	return mice
+
+func spawn_light(pos = Vector2.ZERO, flip = false):
+	var light = load("res://Scenes/Levels/Light.tscn").instance()
+	light.set_global_position(pos)
+	light.get_node("Sprite").set_flip_h(flip)
+	get_node("/root/World").add_child(light)
+	return light
+
+func generate_gate():
+	enemy_count -= 1
+	if enemy_count <= 0:
+		var rainbow = load(rainbow_path).instance()
+		get_node("RainbowGroup").add_child(rainbow)

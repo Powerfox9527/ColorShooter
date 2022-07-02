@@ -157,7 +157,7 @@ script = ExtResource( 2 )
 gun_radius = 7
 gun_offset = Vector2( 2, 5 )
 defense = 30.0
-color = Color( 1, 0, 0, 1 )
+color = Color( 1, 0, 0, 0.0392157 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BackHurt = SubResource( 28 )

@@ -108,10 +108,18 @@ func get_nav_path(start_pos, end_pos):
 	for step in paths:
 		res.append(astar.get_point_position(step))
 	if res.size() > 0:
-		res.append(end_pos)
+		# res.append(end_pos)
 		res.insert(0, start_pos)
 	get_node("/root/World").set_debug_points(res)
 	return res
 
 func get_cell_size():
 	return cell_size
+
+func get_ran_neighbor(point):
+	var p_id = astar.get_closest_point(point)
+	var neighbors = astar.get_point_connections(p_id)
+	if neighbors.size() <= 0:
+		return
+	var ran_neighbor = neighbors[int(rand_range(0, neighbors.size() - 1))]
+	return astar.get_point_position(ran_neighbor)

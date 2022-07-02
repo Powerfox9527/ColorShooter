@@ -8,6 +8,7 @@ var self_to_target = Vector2.ZERO
 onready var animator = get_node("AnimationPlayer")
 onready var gun = get_node("Gun")
 onready var sprite = get_node("ActorSprite")
+onready var manager = get_node("/root/World")
 export var speed = 300
 export var hurt_time = 0.1
 export var gun_radius = 20
@@ -23,6 +24,7 @@ func _ready():
 	gun_radius *= get_scale().x
 	gun_offset *= get_scale().x
 	gun.power = attack
+	add_user_signal("Death")
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)

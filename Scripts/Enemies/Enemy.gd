@@ -7,13 +7,15 @@ var dest_pos = Vector2.ZERO
 var start_pos = Vector2.ZERO
 var dirs = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, 1), Vector2(1, -1)]
 var nav_offset = 0
-onready var player = get_node("/root/World/Player")
 var points = []
+onready var navigation = get_node("/root/World/Navigation2D")
+onready var player = get_node("/root/World/Player")
+
+
 
 func _ready():
 	generate_state()
 	$StateTimer.connect("timeout", self, "generate_state")
-	var navigation = get_node("/root/World/Navigation2D")
 	var shape = $CollisionShape2D.get_shape()
 	var shape_diag = pow(shape.extents.x * scale.x, 2) * pow(shape.extents.y * scale.y, 2)
 	var nav_cell_diag = pow(navigation.get_cell_size().x, 2) * pow(navigation.get_cell_size().y, 2)
@@ -33,14 +35,7 @@ func _physics_process(delta):
 	if is_in_state:
 		return
 	is_in_state = true
-	if state == "chase":
-		chase()
-	elif state == "color_change":
-		color_change()
-	elif state == "simple_shoot":
-		simple_shoot()
-	elif state == "circle_shoot":
-		circle_shoot()
+	call(state)
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
 			var collision = get_slide_collision(i)
@@ -49,7 +44,9 @@ func _physics_process(delta):
 
 ### state
 func generate_state():
-	$StateTimer.wait_time = randi() % 3 + 3 # 每3-5s换一次模式
+	# change behavior every 3 to 5 seconds
+	is_in_state = false
+	$StateTimer.wait_time = randi() % 3 + 3
 	var value = randf()
 	if value < 0.4:
 		state =  "simple_shoot"
@@ -59,11 +56,9 @@ func generate_state():
 		state =  "color_change"
 	elif value < 1:
 		state =  "circle_shoot"
-	state = "chase"
 	# print(state)
 		
 func chase():
-	var navigation = get_node("/root/World/Navigation2D")
 	var player_pos = get_node("/root/World/Player").get_global_position()
 	var path = navigation.get_nav_path(get_global_position(), player_pos)
 	if path.empty():
@@ -152,6 +147,7 @@ func dead():
 	set_anim("Jump", true)
 	shoot(bullet_velocities)
 	generate_state()
+	emit_signal("Death")
 
 ### anim
 func _on_anim_finished(anim_name):

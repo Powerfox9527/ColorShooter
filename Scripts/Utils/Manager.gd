@@ -1,5 +1,6 @@
 extends Node2D
 var debug_points = []
+var timers = []
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -10,8 +11,8 @@ func _ready():
 	$Navigation2D.set_scale($Generator.get_scale())
 	$Generator.refresh_generation()
 	$Navigation2D.refresh_navigation()
+	$Generator.generate_enemies()
 	emit_signal("Inited")
-	spawn_coke()
 
 func _draw():
 	for point in debug_points:
@@ -20,7 +21,3 @@ func _draw():
 func set_debug_points(points):
 	debug_points = points
 	update()
-	
-func spawn_coke():
-	var coke = load("res://Scenes/Enemies/Coke.tscn").instance()
-	add_child(coke)
