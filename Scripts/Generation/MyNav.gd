@@ -52,8 +52,10 @@ func update_connection():
 #				String(astar.get_point_connections(point_id)))
 
 func get_cell_by_pos(pos):
-	var cell_layer_size = cell_size * get_scale()
-	return Vector2(floor(pos.x / cell_layer_size.x), floor(pos.y / cell_layer_size.y))
+	var pos_in_map = generator.tilemap.world_to_map(pos) / scale
+	pos_in_map.x = int(floor(pos_in_map.x))
+	pos_in_map.y = int(floor(pos_in_map.y))
+	return pos_in_map
 
 func get_pos_by_cell(cell):
 	var local_position = generator.tilemap.map_to_world(cell) * scale

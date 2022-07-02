@@ -18,7 +18,6 @@ func generate_state():
 		state = "random_walk"
 	elif value < 1:
 		state =  "chase"
-	state = "random_walk"
 	# print(state)
 
 func simple_shoot():

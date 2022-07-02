@@ -9,6 +9,8 @@ onready var animator = get_node("AnimationPlayer")
 onready var gun = get_node("Gun")
 onready var sprite = get_node("ActorSprite")
 onready var manager = get_node("/root/World")
+onready var navigation = get_node("/root/World/Navigation2D")
+onready var generator = get_node("/root/World/Generator")
 export var speed = 300
 export var hurt_time = 0.1
 export var gun_radius = 20
@@ -25,6 +27,21 @@ func _ready():
 	gun_offset *= get_scale().x
 	gun.power = attack
 	add_user_signal("Death", [self])
+
+func _process(delta):
+	var cell = navigation.get_cell_by_pos(get_global_position())
+	var cells = generator.island_cells[0]
+	if not cells.has(cell):
+		get_hurt(Color(0, 0, 0, 0.1))
+		var distance = INF
+		var closest_pos = Vector2.ZERO
+		for ok_cell in cells:
+			var ok_pos = navigation.get_pos_by_cell(ok_cell)
+			if navigation.get_cell_value(ok_cell.x, ok_cell.y) == 1 and (ok_pos - get_global_position()).length() < distance:
+				distance = (ok_pos - get_global_position()).length()
+				closest_pos = ok_pos
+		# yield(get_tree().create_timer(0.3), "timeout")
+		# set_global_position(closest_pos)
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)

@@ -8,9 +8,7 @@ var start_pos = Vector2.ZERO
 var dirs = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, 1), Vector2(1, -1)]
 var nav_offset = 0
 var points = []
-onready var navigation = get_node("/root/World/Navigation2D")
 onready var player = get_node("/root/World/Player")
-
 
 
 func _ready():
@@ -146,7 +144,6 @@ func dead():
 		bullet_velocities.append(bullet_velocity)
 	set_anim("Jump", true)
 	shoot(bullet_velocities)
-	generate_state()
 	emit_signal("Death", self)
 
 ### anim
