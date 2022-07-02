@@ -6,11 +6,11 @@ var width = 0
 var height = 0
 var debug_points = []
 onready var astar = AStar2D.new()
+onready var generator = get_node("/root/World/Generator")
 var dirs = [Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0), Vector2(0, -1)]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(false)
-	refresh_navigation()
 
 func refresh_navigation():
 	nav_tilemap.clear()
@@ -18,8 +18,11 @@ func refresh_navigation():
 	astar.clear()
 	debug_points.clear()
 	var index = 0
-	for tilemap in get_children():
-		cell_size.append(tilemap.get_cell_size())
+	# first layer for the navigation, second layer for the obstruction
+	for tilemap in generator.get_children():
+		if not tilemap is TileMap:
+			continue
+		cell_size = tilemap.get_cell_size() * get_scale()
 		for cellIdx in tilemap.get_used_cells():
 			var cell = tilemap.get_cell(cellIdx.x, cellIdx.y)
 			var nav = tilemap.tile_set.tile_get_navigation_polygon(cell)
@@ -48,14 +51,14 @@ func update_connection():
 #			print(String(point_id) + ": " + String(row) + ", " + String(col) + " " +
 #				String(astar.get_point_connections(point_id)))
 
-func get_cell_by_pos(pos, tile_layer = 0):
-	var cell_layer_size = cell_size[tile_layer] * get_scale()
+func get_cell_by_pos(pos):
+	var cell_layer_size = cell_size * get_scale()
 	return Vector2(floor(pos.x / cell_layer_size.x), floor(pos.y / cell_layer_size.y))
 
-func get_pos_by_cell(cell, tile_layer = 0):
-	var local_position = $TileMap.map_to_world(cell)
-	local_position += cell_size[tile_layer] * 0.5
-	return local_position * scale
+func get_pos_by_cell(cell):
+	var local_position = generator.tilemap.map_to_world(cell) * scale
+	local_position += cell_size * 0.5
+	return local_position
 
 
 func print_nav_map():
@@ -97,17 +100,18 @@ func set_cell_value(x, y, z):
 		nav_tilemap[x] = {}
 	nav_tilemap[x][y] = z
 
-func get_nav_path(start_pos, end_pos, tile_layer = 0):
-	var paths = astar.get_id_path(astar.get_closest_point(start_pos), astar.get_closest_point(end_pos))
+func get_nav_path(start_pos, end_pos):
+	var a_id = astar.get_closest_point(start_pos)
+	var e_id = astar.get_closest_point(end_pos)
+	var paths = astar.get_id_path(a_id, e_id)
 	var res = PoolVector2Array()
 	for step in paths:
 		res.append(astar.get_point_position(step))
 	if res.size() > 0:
 		res.append(end_pos)
 		res.insert(0, start_pos)
-		
-	get_node("/root/World").set_debug_points_red(res)
+	get_node("/root/World").set_debug_points(res)
 	return res
 
-func get_cell_size(tile_layer = 0):
-	return cell_size[tile_layer]
+func get_cell_size():
+	return cell_size

@@ -18,6 +18,8 @@ export var seed_id = 0
 export var use_seed = false
 export var island_count = 2
 onready var tilemap = $TileMap
+onready var tilemap2 = $TileMap2
+onready var tilemap3 = $TileMap3
 var island_cells = []
 var rainbow_path = "res://Scenes/Levels/Rainbow.tscn"
 
@@ -25,12 +27,15 @@ func _ready():
 	cell_size = tilemap.get_cell_size() * tilemap.scale
 	if use_seed:
 		ran_generator.set_seed(seed_id)
+	
+func refresh_generation():
 	# generate a big island in the center and spread out
 	generate_island(Vector2.ZERO, 2)
 	for i in range(island_count):
 		var ran = ran_generator.randi_range(0, 7)
 		var island_dir = (Vector2.ZERO + dirs[ran]) * ran_generator.randf_range(cell_num / 4, cell_num)
 		generate_island(island_dir)
+	generate_obstruct()
 
 func generate_island(island_center, scale = 1):
 	var points = [island_center] 
@@ -80,3 +85,15 @@ func get_cell_dir(point, points):
 			return 6
 		return test_count[0] * 2
 
+func generate_obstruct():
+	var first_cells = island_cells[0]
+	var second_cells = []
+	for point in first_cells:
+		var dir = get_cell_dir(point, first_cells)
+		if dir == 8 and point != Vector2.ZERO:
+			var spawn = ran_generator.randf()
+			if spawn < 0:
+				dir = ran_generator.randi_range(9, 14)
+				tilemap2.set_cell(point.x, point.y, dir)
+				second_cells.append(point)
+	island_cells.append(second_cells)
