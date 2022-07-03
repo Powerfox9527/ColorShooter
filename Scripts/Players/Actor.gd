@@ -30,6 +30,9 @@ func _ready():
 	add_user_signal("Death", [self])
 
 func _process(delta):
+	fall()
+
+func fall():
 	var cell = navigation.get_cell_by_pos(get_global_position())
 	var cells = generator.island_cells[0]
 	if not cells.has(cell) and not is_falling:
@@ -39,17 +42,20 @@ func _process(delta):
 		yield(get_tree().create_timer(0.2), "timeout")
 		set_process(false)
 		set_physics_process(false)
+		set_anim("Fall", true)
+		gun.set_visible(false)
 		for ok_cell in cells:
 			var ok_pos = navigation.get_pos_by_cell(ok_cell)
 			if navigation.get_cell_value(ok_cell.x, ok_cell.y) == 1 and (ok_pos - get_global_position()).length() < distance:
 				distance = (ok_pos - get_global_position()).length()
 				closest_pos = ok_pos
-		yield(get_tree().create_timer(0.5), "timeout")
+		yield(get_tree().create_timer(0.3), "timeout")
 		set_global_position(closest_pos)
-		is_falling = false
 		get_hurt(Color(1, 1, 1, 1))
 		set_process(true)
 		set_physics_process(true)
+		gun.set_visible(true)
+		is_falling = false
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Shaders/SetColorExceptGray.gdshader" type="Shader" id=1]
 [ext_resource path="res://Scripts/Players/Player.gd" type="Script" id=2]
@@ -70,6 +70,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 20.0, 24.0, 25.0, 26.0, 27.0, 28.0 ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ActorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, 36.0, 37.0, 38.0, 39.0 ]
 }
 
 [sub_resource type="Animation" id=29]
@@ -144,7 +160,7 @@ tracks/0/keys = {
 shader = ExtResource( 1 )
 shader_param/color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StreamTexture" id=30]
+[sub_resource type="StreamTexture" id=31]
 load_path = "res://.import/Player.png-6696d0cab733bf371608b7eb27bafeea.stex"
 
 [sub_resource type="RectangleShape2D" id=18]
@@ -165,6 +181,7 @@ anims/BackIdle = SubResource( 19 )
 anims/BackRoll = SubResource( 24 )
 anims/BackShoot = SubResource( 26 )
 anims/BackWalk = SubResource( 20 )
+anims/Fall = SubResource( 30 )
 anims/Hurt = SubResource( 29 )
 anims/Idle = SubResource( 21 )
 anims/Roll = SubResource( 22 )
@@ -177,8 +194,8 @@ shoot_interval = 0.2
 [node name="ActorSprite" type="Sprite" parent="."]
 material = SubResource( 16 )
 position = Vector2( 1, 1 )
-texture = SubResource( 30 )
-hframes = 6
+texture = SubResource( 31 )
+hframes = 7
 vframes = 6
 frame = 20
 __meta__ = {

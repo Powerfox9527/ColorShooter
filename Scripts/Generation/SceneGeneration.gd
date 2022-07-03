@@ -17,7 +17,7 @@ var ran_generator = RandomNumberGenerator.new()
 export var seed_id = 0
 export var use_seed = false
 export var island_count = 0
-export var enemy_count = 0
+export var enemy_count = 1
 onready var tilemap = $TileMap
 onready var tilemap2 = $TileMap2
 onready var tilemap3 = $TileMap3
@@ -131,14 +131,14 @@ func spawn_mouse(pos = Vector2.ZERO):
 	return mice
 
 func spawn_light(pos = Vector2.ZERO, flip = false):
-	var light = load("res://Scenes/Levels/Light.tscn").instance()
+	var light = load("res://Scenes/Levels/RoadLamp.tscn").instance()
 	light.set_global_position(pos)
-	light.get_node("Sprite").set_flip_h(flip)
+	light.get_node("AnimatedSprite").set_flip_h(flip)
 	get_node("/root/World").add_child(light)
 	return light
 
 func spawn_bonus(pos = Vector2.ZERO):
-	var bonus = load("res://Scenes/Levels/Light.tscn").instance()
+	var bonus = load("res://Scenes/Levels/RoadLamp.tscn").instance()
 	bonus.set_global_position(pos)
 	get_node("/root/World").add_child(bonus)
 	return bonus
