@@ -22,9 +22,11 @@ animations = [ {
 [node name="RoadLamp" type="Node2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 46, 0 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 4 )
+frame = 1
 playing = true
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL1Nwcml0ZXMvTGV2ZWxzL1RpbGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1UcnVlCm9fZXhfcHw9Cg=="
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpzb3VyY2V8PXJlczovL1Nwcml0ZXMvTGV2ZWxzL0l0ZW1zL1JvYWRMYW1wLmFzZXByaXRlCmxheWVyfD0Kb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9VHJ1ZQpvX2V4X3B8PQo="
 }

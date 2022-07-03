@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/White_Block.png-5fa600682106360cdba19667cffe6121.stex"
+path="res://.import/Chest.png-409bc6d2521fed8af545d6a00df03ae8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Levels/Items/White_Block.png"
-dest_files=[ "res://.import/White_Block.png-5fa600682106360cdba19667cffe6121.stex" ]
+source_file="res://Scenes/Levels/Items/Chest.png"
+dest_files=[ "res://.import/Chest.png-409bc6d2521fed8af545d6a00df03ae8.stex" ]
 
 [params]
 

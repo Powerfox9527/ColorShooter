@@ -22,7 +22,7 @@ onready var tilemap = $TileMap
 onready var tilemap2 = $TileMap2
 onready var tilemap3 = $TileMap3
 var island_cells = []
-var rainbow_path = "res://Scenes/Levels/Rainbow.tscn"
+var rainbow_path = "res://Scenes/Levels/Items/Rainbow.tscn"
 
 func _ready():
 	cell_size = tilemap.get_cell_size() * tilemap.scale
@@ -131,14 +131,14 @@ func spawn_mouse(pos = Vector2.ZERO):
 	return mice
 
 func spawn_light(pos = Vector2.ZERO, flip = false):
-	var light = load("res://Scenes/Levels/RoadLamp.tscn").instance()
+	var light = load("res://Scenes/Levels/Items/RoadLamp.tscn").instance()
 	light.set_global_position(pos)
 	light.get_node("AnimatedSprite").set_flip_h(flip)
 	get_node("/root/World").add_child(light)
 	return light
 
 func spawn_bonus(pos = Vector2.ZERO):
-	var bonus = load("res://Scenes/Levels/RoadLamp.tscn").instance()
+	var bonus = load("res://Scenes/Levels/Items/Chest.tscn").instance()
 	bonus.set_global_position(pos)
 	get_node("/root/World").add_child(bonus)
 	return bonus

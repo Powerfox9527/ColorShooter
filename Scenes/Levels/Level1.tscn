@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Players/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Players/Mouse.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Generation/MyNav.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/UI/RedBar.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/RedFrame.png" type="Texture" id=5]
@@ -73,3 +74,5 @@ position = Vector2( 0, -400 )
 color = Color( 1, 0, 0, 1 )
 
 [node name="BulletGroup" type="Node2D" parent="."]
+
+[node name="Mouse" parent="." instance=ExtResource( 2 )]

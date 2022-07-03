@@ -25,13 +25,6 @@ script = ExtResource( 1 )
 position = Vector2( 9, 1 )
 shape = SubResource( 4 )
 
-[node name="Light2D" type="Light2D" parent="."]
-visible = false
-position = Vector2( 12, 1 )
-scale = Vector2( 3.2, 3.2 )
-texture = ExtResource( 2 )
-energy = 4.76
-
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )
 position = Vector2( 12, 1 )
@@ -42,3 +35,6 @@ texture = ExtResource( 2 )
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="Light2D" type="Light2D" parent="."]
+enabled = false
