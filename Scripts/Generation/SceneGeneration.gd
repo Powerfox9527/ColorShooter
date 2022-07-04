@@ -158,15 +158,20 @@ func generate_gate(enemy):
 			ok_cells.append([])
 		for point in first_cells:
 			var dir = get_cell_dir(point, first_cells)
-			if dir in [0, 2, 4, 6]:
-				ok_cells[dir / 2].append(point)
-		ok_cells.shuffle()
-		for ok_dir in ok_cells:
+			if dir in [1, 3, 5, 7]:
+				ok_cells[(dir - 1) / 2].append(point)
+		var rainbow_dirs = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
+		for i in range(ok_cells.size()):
+			var ok_dir = ok_cells[i]
 			if gate_count <= 0:
 				break
 			var ok_cell = Util.pick_rand_item(ok_dir, ran_generator)
-			var gate_pos = tilemap.map_to_world(ok_cell) * scale
-			gate_pos += cell_size * 0.5
-			rainbow.set_global_position(gate_pos)
-			rainbow.set_scale(Vector2(2, 100))
+			for j in range(20):
+				ok_cell += rainbow_dirs[i]
+				# horizontal and vertical have different type
+				if i % 2 == 1:
+					tilemap.set_cell(ok_cell.x, ok_cell.y, 15, true, false, true)
+				else:
+					tilemap.set_cell(ok_cell.x, ok_cell.y, 15)
+				island_cells[0].append(ok_cell)
 			gate_count -= 1
