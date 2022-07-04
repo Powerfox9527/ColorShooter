@@ -22,6 +22,7 @@ onready var tilemap = $TileMap
 onready var tilemap2 = $TileMap2
 onready var tilemap3 = $TileMap3
 var island_cells = []
+var rainbow_cells = []
 var rainbow_path = "res://Scenes/Levels/Items/Rainbow.tscn"
 
 func _ready():
@@ -161,6 +162,11 @@ func generate_gate(enemy):
 			if dir in [1, 3, 5, 7]:
 				ok_cells[(dir - 1) / 2].append(point)
 		var rainbow_dirs = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
+		
+		# only use cells in the border 
+		for i in range(ok_cells.size()):
+			ok_cells[i] = find_most_dir_cells(ok_cells[i], rainbow_dirs[i])
+		
 		for i in range(ok_cells.size()):
 			var ok_dir = ok_cells[i]
 			if gate_count <= 0:
@@ -173,5 +179,30 @@ func generate_gate(enemy):
 					tilemap.set_cell(ok_cell.x, ok_cell.y, 15, true, false, true)
 				else:
 					tilemap.set_cell(ok_cell.x, ok_cell.y, 15)
-				island_cells[0].append(ok_cell)
+				rainbow_cells.append(ok_cell)
 			gate_count -= 1
+
+# ex: find the most up cell in the cells
+func find_most_dir_cells(cells, dir):
+	var max_val = -INF
+	var ok_cells = []
+	var is_neg = dir.x < 0 or dir.y < 0
+	for i in range(cells.size()):
+		var cell = cells[i]
+		var use_val = cell.x
+		if dir.x == 0:
+			use_val = cell.y
+		if is_neg:
+			use_val = -1 * use_val
+		if max_val < use_val:
+			max_val = use_val
+	for i in range(cells.size()):
+		var cell = cells[i]
+		var use_val = cell.x
+		if dir.x == 0:
+			use_val = cell.y
+		if is_neg:
+			use_val = -1 * use_val
+		if max_val == use_val:
+			ok_cells.append(cells[i])
+	return ok_cells

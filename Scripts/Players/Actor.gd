@@ -34,7 +34,7 @@ func _process(delta):
 
 func fall():
 	var cell = navigation.get_cell_by_pos(get_global_position())
-	var cells = generator.island_cells[0]
+	var cells = generator.island_cells[0] + generator.rainbow_cells
 	if not cells.has(cell) and not is_falling:
 		is_falling = true
 		var distance = INF
@@ -56,6 +56,9 @@ func fall():
 		set_physics_process(true)
 		gun.set_visible(true)
 		is_falling = false
+#	if cell in generator.rainbow_cells and get_node("Camera2D") != null:
+#		set_physics_process(false)
+#		set_process(false)
 
 func set_color(new_color):
 	color.r = min(max(0, new_color.r), 1)
